@@ -1,29 +1,41 @@
 # Networking Bootcamp (2025 with Andrew Brown & Tim McConnaughy)
 
-This repo tracks my work in the **2-week Networking Bootcamp** led by Andrew Brown, with technical input from Tim McConnaughy (Aviatrix). The bootcamp focuses on **deep practical networking skills**, likely touching on routing, VPNs, SDN, and cloud-based infra.
+This repo tracks my work in the **2-week Networking Bootcamp** led by Andrew Brown, with technical input from Tim McConnaughy (Aviatrix). The course focuses on **practical cloud networking**, likely covering routing, VPNs, SDN, and multi-cloud infrastructure.
 
-This repo tracks my work in the 2-week Networking Bootcamp.  
-📌 Homework is submitted weekly.  
-💥 Goal: Go beyond the minimum. Build something that lasts.
+📌 Deliverables are due weekly — no late submissions.  
+💥 The goal: go beyond the minimum. Build something that lasts.
 
 ## ⚔️ Bootcamp Format
 
-- ⏱️ 2 weeks of live instruction
-- 💥 Weekly homework — no late submissions
-- 🧠 Homework is where you shine (graded, not hand-held)
-- 🚫 No grading for late or missing work
-- 
+- ⏱️ Two weeks of live instruction
+- 🧠 Graded weekly submissions (on-time or bust)
+- 🚫 No extensions or regrades
+- 🎯 Best work comes from pushing beyond the spec
+
 ## 📅 Week Schedule
-- Week 0: Prerequisites TBD
+- Week 0: Prerequisites (TBD)
 - Week 1: TBD
 - Week 2: TBD
 
-## ✅ Submissions
-Each week folder contains:
+## ✅ Weekly Deliverables
+Each week folder includes:
 - Lecture notes
-- Homework writeups
+- Submission writeups
 - Network diagrams
-- Bonus materials
+- Bonus material (if any)
+
+## 🧠 Areas I'm Focusing On
+
+- Real-world routing & packet flow
+- Network troubleshooting workflows
+- SDN and cloud network architecture
+- How Aviatrix fits into multi-cloud design
+
+## 🔥 Goals
+
+- Complete and submit all deliverables on time
+- Document with diagrams + walkthroughs for clarity
+- Apply insights to my 100DoC repo and broader cloud work
 
 ## 💡 Bonus
 If I go overboard (as I tend to do), check the `extras/` folder.
@@ -31,6 +43,6 @@ If I go overboard (as I tend to do), check the `extras/` folder.
 ## 🔧 Setup (To Be Updated)
 
 - Platform: [TBD]
-- Tooling: Wireshark, Draw.io, Aviatrix docs, Cloud provider consoles, etc. (probably)
+- Tooling: Wireshark, Draw.io, Aviatrix docs, cloud consoles, etc.
 
 ## 📁 Repo Structure (Starter Template)
