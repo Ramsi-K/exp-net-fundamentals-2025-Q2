@@ -518,25 +518,6 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Name]
-
-- **Definition**:  
-  Your one-liner explanation.
-
-- **Why it matters**:  
-  (Optional) What problem it solves or why it's important.
-
-- **AWS context**:  
-  Where it shows up in AWS, if relevant.
-
-- **Link**:  
-  [Link to AWS docs]()
-
-- **Personal Notes**:  
-  Anything you misremember, how it clicked, or what to watch out for.
-
----
-
 ## Term: CIDR
 
 - **Definition**:  
@@ -613,7 +594,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: DNS64 and NAT64
 
 - **Definition**:  
   Your one-liner explanation.
@@ -632,7 +613,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Gateways
 
 - **Definition**:  
   Your one-liner explanation.
@@ -651,7 +632,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Proxies - Local, API gateway, Service Mesh, Reverse/Load Balancer, CDN Edge proxies
 
 - **Definition**:  
   Your one-liner explanation.
@@ -670,7 +651,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Load Balancing - External, Ingress, Service, Internal (iptables, ipvs)
 
 - **Definition**:  
   Your one-liner explanation.
@@ -689,7 +670,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Bastion / Jump Box
 
 - **Definition**:  
   Your one-liner explanation.
@@ -708,7 +689,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Netfilter Project
 
 - **Definition**:  
   Your one-liner explanation.
@@ -727,7 +708,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: IPVS - IP Tables
 
 - **Definition**:  
   Your one-liner explanation.
@@ -746,7 +727,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Certificates and TLS
 
 - **Definition**:  
   Your one-liner explanation.
@@ -765,7 +746,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: In-Transit(TLS, SSL) VS At-Rest Encryption(AES, RSA)
 
 - **Definition**:  
   Your one-liner explanation.
@@ -784,7 +765,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: IPSec
 
 - **Definition**:  
   Your one-liner explanation.
@@ -803,7 +784,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Virtual Ethernet Devices (Veths)
 
 - **Definition**:  
   Your one-liner explanation.
@@ -822,7 +803,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: EthO and Network Space (ip addr, ip netns)
 
 - **Definition**:  
   Your one-liner explanation.
@@ -841,7 +822,7 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Network Interface Controller
 
 - **Definition**:  
   Your one-liner explanation.
@@ -860,7 +841,121 @@ That grows exponentially with the number of compartments.
 
 ---
 
-## Term: [Term Here]
+## Term: Virtual Network Interfaces
+
+- **Definition**:  
+  Your one-liner explanation.
+
+- **Why it matters**:  
+  (Optional) What problem it solves or why it's important.
+
+- **AWS context**:  
+  Where it shows up in AWS, if relevant.
+
+- **Link**:  
+  [Link to AWS docs]()
+
+- **Personal Notes**:  
+  Anything you misremember, how it clicked, or what to watch out for.
+
+---
+
+## Term: OSI Model
+
+- **Definition**:  
+  Your one-liner explanation.
+
+- **Why it matters**:  
+  (Optional) What problem it solves or why it's important.
+
+- **AWS context**:  
+  Where it shows up in AWS, if relevant.
+
+- **Link**:  
+  [Link to AWS docs]()
+
+- **Personal Notes**:  
+  Anything you misremember, how it clicked, or what to watch out for.
+
+---
+
+## Term: TCP/IP
+
+- **Definition**:  
+  Your one-liner explanation.
+
+- **Why it matters**:  
+  (Optional) What problem it solves or why it's important.
+
+- **AWS context**:  
+  Where it shows up in AWS, if relevant.
+
+- **Link**:  
+  [Link to AWS docs]()
+
+- **Personal Notes**:  
+  Anything you misremember, how it clicked, or what to watch out for.
+
+---
+
+## Term: Protocol Data Units
+
+- **Definition**:  
+  Your one-liner explanation.
+
+- **Why it matters**:  
+  (Optional) What problem it solves or why it's important.
+
+- **AWS context**:  
+  Where it shows up in AWS, if relevant.
+
+- **Link**:  
+  [Link to AWS docs]()
+
+- **Personal Notes**:  
+  Anything you misremember, how it clicked, or what to watch out for.
+
+---
+
+## Term: DNS - FQDN
+
+- **Definition**:  
+  Your one-liner explanation.
+
+- **Why it matters**:  
+  (Optional) What problem it solves or why it's important.
+
+- **AWS context**:  
+  Where it shows up in AWS, if relevant.
+
+- **Link**:  
+  [Link to AWS docs]()
+
+- **Personal Notes**:  
+  Anything you misremember, how it clicked, or what to watch out for.
+
+---
+
+## Term: DHCP
+
+- **Definition**:  
+  Your one-liner explanation.
+
+- **Why it matters**:  
+  (Optional) What problem it solves or why it's important.
+
+- **AWS context**:  
+  Where it shows up in AWS, if relevant.
+
+- **Link**:  
+  [Link to AWS docs]()
+
+- **Personal Notes**:  
+  Anything you misremember, how it clicked, or what to watch out for.
+
+---
+
+## Term: SSH and RDP
 
 - **Definition**:  
   Your one-liner explanation.
