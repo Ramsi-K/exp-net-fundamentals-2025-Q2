@@ -8,8 +8,6 @@
 
 The system demonstrates advanced AWS networking principles including VPC design, cross-VPC communication via S3, subnet isolation, secure firewalls, and event-driven workflows.
 
-This is a **Red Squad submission** for the **Networking Fundamentals Bootcamp**, showcasing both cloud infrastructure and GenAI orchestration.
-
 ---
 
 ## 💡 Use Case
@@ -25,16 +23,30 @@ Behind the scenes, two agents — Bayko and Brown — process and generate the c
 
 ---
 
-## 📦 Infra & Roles Overview
+## 📚 Architecture Diagrams
 
-| Component          | Role                                         | Service                                   |
-| ------------------ | -------------------------------------------- | ----------------------------------------- |
-| **User**           | External request initiator                   | Enters via public API Gateway (VPC-Brown) |
-| **Agent Brown**    | Frontend agent (dialogue intake, validation) | Lambda/API behind ALB/NLB in VPC-Brown    |
-| **S3 Bucket**      | “Window” for agent comms                     | Shared AWS S3 with access policy          |
-| **Agent Bayko**    | Backend agent (animation, voice)             | Lambda/API in VPC-Bayko                   |
-| **Output S3**      | Comic/video delivery bucket                  | Public-read S3 or CloudFront              |
-| **Optional Tools** | Logging, Moderation, TTS                     | Lambdas or Docker containers              |
+This project includes a full suite of system diagrams in [architecture.md](./architecture.md), covering:
+
+- 🧠 System Architecture Overview
+- 🔁 Agent Processing Flow
+- 🔀 MCP Subsystem Orchestration
+- 📦 Output Artifact Structure
+- 🔐 Network Security & Isolation
+
+Each diagram is rendered using Mermaid and maps directly to the actual infrastructure and agent logic used in the pipeline.
+
+---
+
+## 👥 Agent Roles
+
+Detailed breakdown of each GenAI agent is available in [agents.md](./agents.md):
+
+- 🤖 **Agent Brown**: Input validator, style tagger, and storyboard author
+- 🧠 **Agent Bayko**: MCP-driven backend agent for image, audio, and video generation
+
+Covers toolchain decisions, moderation logic, and agent boundaries.
+
+---
 
 ## 🎬 Pipeline Steps
 
@@ -79,20 +91,24 @@ Behind the scenes, two agents — Bayko and Brown — process and generate the c
    - Delivers signed URL (CloudFront or pre-signed S3)
    - Optionally logs session metadata
 
-## 🧠 Networking Concepts Mapped
+---
 
-| Bootcamp Concept           | Where It Shows Up                                                                          |
-| -------------------------- | ------------------------------------------------------------------------------------------ |
-| VPCs & Subnets             | Bayko and Brown are in separate VPCs                                                       |
-| Public/Private Networking  | Public APIs, private inference workloads                                                   |
-| Firewalls / SGs            | No agent-to-agent direct communication                                                     |
-| L4 Firewall Isolation      | Bayko cannot receive inbound traffic from Brown; traffic must flow via S3/EventBridge only |
-| NAT Gateway                | Bayko's outbound traffic routed through NAT                                                |
-| S3 as Network Bus          | White box "window" analogy for inter-agent comms                                           |
-| Load Balancer (ALB/NLB)    | ALB fronts Agent Brown                                                                     |
-| Bastion Host / VPN         | Optional intranet access for Bayko                                                         |
-| CloudWatch Logs            | Used for story failures, moderation, or trace capture                                      |
-| Wireshark-style Monitoring | Simulated via logging Lambda                                                               |
+## 📦 Infra & Roles Overview
+
+| Component          | Role                                         | Service                                   |
+| ------------------ | -------------------------------------------- | ----------------------------------------- |
+| **User**           | External request initiator                   | Enters via public API Gateway (VPC-Brown) |
+| **Agent Brown**    | Frontend agent (dialogue intake, validation) | Lambda/API behind ALB/NLB in VPC-Brown    |
+| **S3 Bucket**      | “Window” for agent comms                     | Shared AWS S3 with access policy          |
+| **Agent Bayko**    | Backend agent (animation, voice)             | Lambda/API in VPC-Bayko                   |
+| **Output S3**      | Comic/video delivery bucket                  | Public-read S3 or CloudFront              |
+| **Optional Tools** | Logging, Moderation, TTS                     | Lambdas or Docker containers              |
+
+---
+
+## 🚀 Deployment Plan
+
+See [`deployment.md`](./deployment.md) for full setup instructions and architecture rollout.
 
 ---
 
@@ -123,9 +139,22 @@ Behind the scenes, two agents — Bayko and Brown — process and generate the c
 
 ---
 
-## 🚀 Deployment Plan
+## 🧠 Networking Concepts Mapped
 
-See [`deployment.md`](./deployment.md) for full setup instructions and architecture rollout.
+| Bootcamp Concept           | Where It Shows Up                                                                          |
+| -------------------------- | ------------------------------------------------------------------------------------------ |
+| VPCs & Subnets             | Bayko and Brown are in separate VPCs                                                       |
+| Public/Private Networking  | Public APIs, private inference workloads                                                   |
+| Firewalls / SGs            | No agent-to-agent direct communication                                                     |
+| L4 Firewall Isolation      | Bayko cannot receive inbound traffic from Brown; traffic must flow via S3/EventBridge only |
+| NAT Gateway                | Bayko's outbound traffic routed through NAT                                                |
+| S3 as Network Bus          | White box "window" analogy for inter-agent comms                                           |
+| Load Balancer (ALB/NLB)    | ALB fronts Agent Brown                                                                     |
+| Bastion Host / VPN         | Optional intranet access for Bayko                                                         |
+| CloudWatch Logs            | Used for story failures, moderation, or trace capture                                      |
+| Wireshark-style Monitoring | Simulated via logging Lambda                                                               |
+
+---
 
 ## 🔐 Security Philosophy
 
