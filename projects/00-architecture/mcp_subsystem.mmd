@@ -1,0 +1,17 @@
+flowchart TD
+    Storyboard["Input: storyboard.json"] --> MCP["MCP Router"]
+
+    MCP --> StyleCheck["Check style tags"]
+    MCP --> SelectLLM["Choose LLM (Claude/OpenAI/etc)"]
+    MCP --> SelectImageGen["Select Image Gen (SDXL / ComfyUI)"]
+    MCP --> TTSCheck{"Is narration requested?"}
+    TTSCheck -- Yes --> SelectTTS["Route to TTS Module"]
+    TTSCheck -- No --> SkipTTS["Skip TTS"]
+
+    SelectLLM --> Assemble
+    SelectImageGen --> Assemble
+    SelectTTS --> Assemble
+    SkipTTS --> Assemble
+
+    Assemble["Assemble Final Comic Output\n(mp4 / images + subtitles)"]
+    Assemble --> OutputS3["Write to Output S3"]
