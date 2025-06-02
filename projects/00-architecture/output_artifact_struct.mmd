@@ -1,0 +1,8 @@
+flowchart TD
+    Bayko["Agent Bayko"]
+    Bayko --> Zip["/output/{UUID}/final.zip"]
+    Zip --> Panels["images/\npanel1.png\npanel2.png..."]
+    Zip --> Audio["audio/\nnarration.mp3"]
+    Zip --> Subtitles["subtitles/\ncomic.srt"]
+    Zip --> Logs["logs/\nmcp.log"]
+    Zip --> Metadata["metadata.json"]
