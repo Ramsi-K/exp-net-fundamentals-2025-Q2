@@ -1,0 +1,118 @@
+graph TB
+    subgraph "Internet & External Access"
+        Internet[🌐 Internet]
+        UserDevice[📱 User Device]
+    end
+    
+    subgraph "AWS Cloud Environment"
+        subgraph "VPC-Brown (Public Tier) - 10.0.0.0/16"
+            subgraph "Public Subnet - 10.0.1.0/24"
+                IGW[🌐 Internet Gateway]
+                ALB[🔄 Application Load Balancer]
+                APIGateway[🚪 API Gateway]
+            end
+            
+            subgraph "Private Subnet - 10.0.2.0/24"  
+                AgentBrown[🤖 Agent Brown Lambda]
+                ModLambda[🛡️ Moderation Lambda]
+            end
+            
+            subgraph "Brown Security Groups"
+                BrownSG["🔒 Brown-SG<br/>Inbound: 443 from Internet<br/>Outbound: 443 to S3<br/>Outbound: 443 to EventBridge"]
+            end
+        end
+        
+        subgraph "Shared Services"
+            S3Bucket[📦 S3 Communication Bucket<br/>Cross-VPC Bridge]
+            EventBridge[⚡ EventBridge<br/>Cross-VPC Triggers]
+            
+            subgraph "S3 Security"
+                S3Policy["📋 S3 Bucket Policy<br/>- Brown: Read/Write storyboards<br/>- Bayko: Read storyboards<br/>- Bayko: Write outputs<br/>- Public: No direct access"]
+            end
+        end
+        
+        subgraph "VPC-Bayko (Private Tier) - 10.1.0.0/16"
+            subgraph "Private Subnet - 10.1.1.0/24"
+                AgentBayko[🧠 Agent Bayko Container]
+                MCPSystem[🔀 MCP Orchestrator]
+                AIToolchain[🛠️ AI Toolchain<br/>SDXL, TTS, LLM]
+            end
+            
+            subgraph "NAT Subnet - 10.1.2.0/24"
+                NATGateway[🌐 NAT Gateway]
+                EIPNat[📌 Elastic IP]
+            end
+            
+            subgraph "Bayko Security Groups"
+                BaykoSG["🔒 Bayko-SG<br/>Inbound: EventBridge only<br/>Outbound: 443 via NAT<br/>Outbound: 443 to S3<br/>NO direct inbound from Brown"]
+            end
+        end
+        
+        subgraph "Output & Monitoring"
+            OutputS3[📁 Output S3 Bucket]
+            CloudFront[☁️ CloudFront Distribution]
+            CloudWatch[📊 CloudWatch Logs]
+            
+            subgraph "Output Security"
+                OutputPolicy["📋 Output S3 Policy<br/>- Bayko: Write only<br/>- CloudFront: Read only<br/>- Users: Via signed URLs only"]
+            end
+        end
+        
+        subgraph "IAM Security Layer"
+            IAMRoles["🔐 IAM Roles & Policies<br/>- BrownExecutionRole<br/>- BaykoExecutionRole<br/>- EventBridgeRole<br/>- S3CrossAccountRole"]
+        end
+    end
+    
+    %% Network Flow - External
+    Internet --> UserDevice
+    UserDevice --> IGW
+    IGW --> ALB
+    ALB --> APIGateway
+    APIGateway --> AgentBrown
+    
+    %% Network Flow - Brown Processing
+    AgentBrown --> ModLambda
+    AgentBrown --> S3Bucket
+    S3Bucket --> EventBridge
+    
+    %% Network Flow - Cross-VPC (Secure)
+    EventBridge --> AgentBayko
+    AgentBayko --> S3Bucket
+    
+    %% Network Flow - Bayko Processing
+    AgentBayko --> MCPSystem
+    MCPSystem --> AIToolchain
+    AIToolchain --> NATGateway
+    NATGateway --> EIPNat
+    EIPNat --> Internet
+    
+    %% Network Flow - Output
+    AgentBayko --> OutputS3
+    OutputS3 --> CloudFront
+    CloudFront --> UserDevice
+    
+    %% Security Associations
+    BrownSG -.-> AgentBrown
+    BrownSG -.-> ModLambda
+    BaykoSG -.-> AgentBayko
+    BaykoSG -.-> MCPSystem
+    S3Policy -.-> S3Bucket
+    OutputPolicy -.-> OutputS3
+    IAMRoles -.-> AgentBrown
+    IAMRoles -.-> AgentBayko
+    
+    %% Monitoring
+    AgentBrown --> CloudWatch
+    AgentBayko --> CloudWatch
+    
+    classDef publicTier fill:#ffebee
+    classDef privateTier fill:#e8eaf6
+    classDef sharedServices fill:#f3e5f5
+    classDef securityGroups fill:#fff3e0
+    classDef securityPolicies fill:#e0f2f1
+    
+    class IGW,ALB,APIGateway publicTier
+    class AgentBayko,MCPSystem,AIToolchain,NATGateway privateTier
+    class S3Bucket,EventBridge,OutputS3,CloudFront sharedServices
+    class BrownSG,BaykoSG securityGroups
+    class S3Policy,OutputPolicy,IAMRoles securityPolicies

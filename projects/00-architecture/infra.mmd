@@ -1,30 +1,82 @@
-flowchart LR
-    subgraph Andrew_Browns_House["🏠 Andrew Brown's House"]
-        WebUI["WebUI\n(User Prompt Input)"]
+graph TB
+    subgraph "External Access"
+        User[👤 User]
+        WebUI[🖥️ WebUI Interface]
     end
-
-    subgraph VPCB["VPC-Brown\nCIDR: 10.0.1.0/24"]
-        ALB["API Gateway / ALB\n(HTTPS 443)"]
-        Brown["Agent Brown\n(Lambda/Container)"]
+    
+    subgraph "VPC-Brown (Public Tier)" 
+        ALB[🔄 Application Load Balancer]
+        AGW[🌐 API Gateway]
+        Brown[🤖 Agent Brown<br/>Input Validator & Formatter]
+        ModLambda[🛡️ Moderation Lambda]
     end
-
-    subgraph Window["S3 Bucket (\"Window\")\nCross-VPC Comms"]
-        SharedS3["Shared S3"]
+    
+    subgraph "Shared Communication Layer"
+        S3Bridge[📦 S3 Communication Bridge<br/>storyboard.json]
+        EventBridge[⚡ EventBridge Triggers]
     end
-
-    subgraph VPCBk["VPC-Bayko\nCIDR: 10.0.2.0/24"]
-        L4["🔥 L4 Firewall\n(No Inbound Traffic)"]
-        Bayko["Agent Bayko\nMCP inside"]
-        OutputS3["Output S3\n(Final Comic)"]
-        NAT["NAT Gateway\n(Outbound Only)"]
+    
+    subgraph "VPC-Bayko (Private Tier)"
+        Bayko[🧠 Agent Bayko<br/>MCP Orchestrator]
+        MCPRouter[🔀 MCP Router]
+        
+        subgraph "AI Toolchain"
+            LLM[🤖 Language Models]
+            SDXL[🎨 Stable Diffusion XL]
+            TTS[🔊 Text-to-Speech]
+            Subtitler[📝 Subtitle Generator]
+        end
+        
+        NAT[🌐 NAT Gateway]
     end
-
-    WebUI -->|Step 1: Send Prompt| ALB
-    ALB -->|Step 2| Brown
-    Brown -->|Step 3: Write storyboard.json| SharedS3
-    SharedS3 -->|Step 4: Trigger| L4 --> Bayko
-    Bayko -->|Step 5: Generate Output| OutputS3
-    OutputS3 -->|Step 6: Brown Delivers Link| Brown --> WebUI
-
-    classDef infra fill:#f9f,stroke:#333,stroke-width:1px;
-    class WebUI,Brown,Bayko,SharedS3,OutputS3,ALB infra;
+    
+    subgraph "Output & Delivery"
+        OutputS3[📁 Output S3 Bucket]
+        CloudFront[☁️ CloudFront CDN]
+    end
+    
+    subgraph "Monitoring & Security"
+        CloudWatch[📊 CloudWatch Logs]
+        IAM[🔐 IAM Roles & Policies]
+    end
+    
+    %% External Flow
+    User --> WebUI
+    WebUI --> ALB
+    ALB --> AGW
+    AGW --> Brown
+    
+    %% Cross-VPC Communication
+    Brown --> S3Bridge
+    Brown --> ModLambda
+    S3Bridge --> EventBridge
+    EventBridge --> Bayko
+    
+    %% Internal Bayko Processing
+    Bayko --> MCPRouter
+    MCPRouter --> LLM
+    MCPRouter --> SDXL
+    MCPRouter --> TTS
+    MCPRouter --> Subtitler
+    
+    %% Output Flow
+    Bayko --> OutputS3
+    OutputS3 --> CloudFront
+    CloudFront --> WebUI
+    
+    %% Network & Security
+    Bayko --> NAT
+    Brown --> CloudWatch
+    Bayko --> CloudWatch
+    IAM -.-> Brown
+    IAM -.-> Bayko
+    
+    classDef publicTier fill:#e1f5fe
+    classDef privateTier fill:#f3e5f5
+    classDef sharedLayer fill:#fff3e0
+    classDef aiTools fill:#e8f5e8
+    
+    class ALB,AGW,Brown,ModLambda publicTier
+    class Bayko,MCPRouter,NAT privateTier
+    class S3Bridge,EventBridge sharedLayer
+    class LLM,SDXL,TTS,Subtitler aiTools
