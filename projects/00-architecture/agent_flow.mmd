@@ -1,0 +1,13 @@
+flowchart TD
+    User[WebUI Prompt] --> Brown["Agent Brown\n(Sanitize + Style)"]
+    Brown --> Format["Storyboard JSON\n(prompt, layout, tags, UUID)"]
+    Format --> S3Write["Write to S3 Window"]
+
+    S3Write --> Trigger["S3 Event / EventBridge Trigger"]
+    Trigger --> Bayko["Agent Bayko\n(MCP Inside)"]
+    Bayko --> Generate["Generate Panels\n+ Dialogue"]
+    Generate --> Optional["Optional: TTS, Captions"]
+    Optional --> OutputS3["Output to S3\nfinal.mp4 / zip"]
+
+    OutputS3 --> Detect["Agent Brown detects output"]
+    Detect --> Respond["Respond to WebUI with Signed URL"]
