@@ -1,0 +1,22 @@
+flowchart LR
+    subgraph VPCB["VPC-Brown (10.0.1.0/24)"]
+        Brown["Agent Brown"]
+    end
+
+    subgraph Window["Shared S3\n(Cross-VPC 'Window')"]
+        S3["S3 Bucket"]
+    end
+
+    subgraph VPCBayko["VPC-Bayko (10.0.2.0/24)"]
+        L4["🔥 L4 Firewall"]
+        Bayko["Agent Bayko"]
+        NAT["NAT Gateway"]
+    end
+
+    Brown -->|PUT storyboard.json| S3
+    S3 -->|S3 Trigger| L4 --> Bayko
+    Bayko -->|Write Output| S3
+    S3 -->|GET final.zip| Brown
+
+    classDef firewall fill:#ffcccc,stroke:#d00,stroke-width:2px;
+    class L4 firewall;
