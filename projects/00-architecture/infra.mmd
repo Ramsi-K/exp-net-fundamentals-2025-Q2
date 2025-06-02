@@ -1,0 +1,30 @@
+flowchart LR
+    subgraph Andrew_Browns_House["🏠 Andrew Brown's House"]
+        WebUI["WebUI\n(User Prompt Input)"]
+    end
+
+    subgraph VPCB["VPC-Brown\nCIDR: 10.0.1.0/24"]
+        ALB["API Gateway / ALB\n(HTTPS 443)"]
+        Brown["Agent Brown\n(Lambda/Container)"]
+    end
+
+    subgraph Window["S3 Bucket (\"Window\")\nCross-VPC Comms"]
+        SharedS3["Shared S3"]
+    end
+
+    subgraph VPCBk["VPC-Bayko\nCIDR: 10.0.2.0/24"]
+        L4["🔥 L4 Firewall\n(No Inbound Traffic)"]
+        Bayko["Agent Bayko\nMCP inside"]
+        OutputS3["Output S3\n(Final Comic)"]
+        NAT["NAT Gateway\n(Outbound Only)"]
+    end
+
+    WebUI -->|Step 1: Send Prompt| ALB
+    ALB -->|Step 2| Brown
+    Brown -->|Step 3: Write storyboard.json| SharedS3
+    SharedS3 -->|Step 4: Trigger| L4 --> Bayko
+    Bayko -->|Step 5: Generate Output| OutputS3
+    OutputS3 -->|Step 6: Brown Delivers Link| Brown --> WebUI
+
+    classDef infra fill:#f9f,stroke:#333,stroke-width:1px;
+    class WebUI,Brown,Bayko,SharedS3,OutputS3,ALB infra;
