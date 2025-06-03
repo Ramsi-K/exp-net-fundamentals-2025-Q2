@@ -1,0 +1,80 @@
+graph TB
+    subgraph "Output S3 Bucket Structure"
+        Root[📁 output/]
+        
+        subgraph "Session Directory"
+            SessionDir["📁 {uuid}/"]
+            
+            subgraph "Media Assets"
+                FinalVideo[🎬 final.mp4<br/>Complete comic video]
+                PanelZip[📦 panels.zip<br/>Individual comic panels]
+                AudioDir[📁 audio/]
+                SubDir[📁 subtitles/]
+            end
+            
+            subgraph "Audio Files"
+                Narration[🔊 narration.wav]
+                Effects[🎵 background.mp3]
+                Dialogue[💬 dialogue_001.wav]
+            end
+            
+            subgraph "Subtitle Files"
+                SubSRT[📝 subtitles.srt]
+                SubVTT[📝 subtitles.vtt]
+                SubJSON[📋 subtitle_data.json]
+            end
+            
+            subgraph "Metadata & Logs"
+                MetaJSON[📊 metadata.json]
+                GenLog[📝 generation.log]
+                Storyboard[📋 original_storyboard.json]
+                Thumbnail[🖼️ thumbnail.jpg]
+            end
+        end
+        
+        subgraph "CDN Distribution"
+            CloudFrontDist[☁️ CloudFront Distribution]
+            SignedURLs[🔗 Pre-signed URLs]
+        end
+    end
+    
+    subgraph "Metadata Structure Detail"
+        MetaDetail["📊 metadata.json<br/>{<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-06-03T10:30:00Z',<br/>  'user_prompt': 'Original prompt',<br/>  'style_tags': ['ghibli', 'moody'],<br/>  'generation_time': '45.2s',<br/>  'tools_used': ['claude', 'sdxl', 'elevenlabs'],<br/>  'panel_count': 4,<br/>  'resolution': '1920x1080',<br/>  'audio_duration': '32.5s',<br/>  'file_sizes': {...},<br/>  'quality_scores': {...}<br/>}"]
+    end
+    
+    Root --> SessionDir
+    SessionDir --> FinalVideo
+    SessionDir --> PanelZip
+    SessionDir --> AudioDir
+    SessionDir --> SubDir
+    SessionDir --> MetaJSON
+    SessionDir --> GenLog
+    SessionDir --> Storyboard
+    SessionDir --> Thumbnail
+    
+    AudioDir --> Narration
+    AudioDir --> Effects
+    AudioDir --> Dialogue
+    
+    SubDir --> SubSRT
+    SubDir --> SubVTT
+    SubDir --> SubJSON
+    
+    SessionDir --> CloudFrontDist
+    CloudFrontDist --> SignedURLs
+    
+    MetaJSON -.-> MetaDetail
+    
+    classDef directories fill:#e1f5fe
+    classDef mediaFiles fill:#e8f5e8
+    classDef audioFiles fill:#fff3e0
+    classDef subtitleFiles fill:#f3e5f5
+    classDef metaFiles fill:#fce4ec
+    classDef cdn fill:#e0f2f1
+    
+    class Root,SessionDir,AudioDir,SubDir directories
+    class FinalVideo,PanelZip,Thumbnail mediaFiles
+    class Narration,Effects,Dialogue audioFiles
+    class SubSRT,SubVTT,SubJSON subtitleFiles
+    class MetaJSON,GenLog,Storyboard metaFiles
+    class CloudFrontDist,SignedURLs cdn
