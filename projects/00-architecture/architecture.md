@@ -1,22 +1,20 @@
-# 🧠 System Architecture – Bayko & Brown: CloudToon Studio
+# 🧠 System Architecture – Bayko & Brown: Multi-Agent Orchestration Platform
 
-This document presents a detailed look at the system architecture, agent orchestration, and networking design of the Bayko & Brown pipeline.
+**One-line summary:** _Production-grade multi-agent system with secure VPC isolation, event-driven workflows, and modular AI toolchain orchestration for enterprise LLMOps._
+
+This document presents the comprehensive system architecture, agent orchestration patterns, and network security design of the Bayko & Brown multi-agent platform.
 
 ---
 
-# Architecture Documentation
+## System Overview
 
-## Bayko & Brown: CloudToon Studio
-
-### Overview
-
-This document presents the comprehensive system architecture for Bayko & Brown CloudToon Studio, a cloud-native GenAI pipeline that transforms user prompts into fully generated comic strips. The system demonstrates advanced AWS networking principles including VPC design, cross-VPC communication, subnet isolation, and event-driven workflows.
+This document presents the comprehensive system architecture for **Bayko & Brown Multi-Agent Orchestration Platform**, a production-ready AI workflow system that demonstrates secure agent isolation, modular tool orchestration, and enterprise-grade infrastructure design. The system showcases advanced AWS networking principles including VPC design, cross-VPC communication, subnet isolation, and event-driven workflows.
 
 ---
 
 ## 1. System Architecture Overview
 
-The complete system architecture showcases the interaction between user interfaces, GenAI agents, and cloud infrastructure components across isolated network boundaries.
+The complete system architecture showcases the interaction between user interfaces, AI agents, and cloud infrastructure components across isolated network boundaries.
 
 ```mermaid
 graph TB
@@ -28,12 +26,12 @@ graph TB
     subgraph "VPC-Brown (Public Tier)"
         ALB[🔄 Application Load Balancer]
         AGW[🌐 API Gateway]
-        Brown[🤖 Agent Brown<br/>Input Validator & Formatter]
+        Brown[🤖 Agent Brown<br/>Input Validator & Router]
         ModLambda[🛡️ Moderation Lambda]
     end
 
     subgraph "Shared Communication Layer"
-        S3Bridge[📦 S3 Communication Bridge<br/>storyboard.json]
+        S3Bridge[📦 S3 Communication Bridge<br/>task_config.json]
         EventBridge[⚡ EventBridge Triggers]
     end
 
@@ -43,9 +41,9 @@ graph TB
 
         subgraph "AI Toolchain"
             LLM[🤖 Language Models]
-            SDXL[🎨 Stable Diffusion XL]
-            TTS[🔊 Text-to-Speech]
-            Subtitler[📝 Subtitle Generator]
+            DataProcessor[📊 Data Processor]
+            Validator[✅ Quality Validator]
+            Assembler[🔧 Output Assembler]
         end
 
         NAT[🌐 NAT Gateway]
@@ -76,9 +74,9 @@ graph TB
     %% Internal Bayko Processing
     Bayko --> MCPRouter
     MCPRouter --> LLM
-    MCPRouter --> SDXL
-    MCPRouter --> TTS
-    MCPRouter --> Subtitler
+    MCPRouter --> DataProcessor
+    MCPRouter --> Validator
+    MCPRouter --> Assembler
 
     %% Output Flow
     Bayko --> OutputS3
@@ -100,14 +98,14 @@ graph TB
     class ALB,AGW,Brown,ModLambda publicTier
     class Bayko,MCPRouter,NAT privateTier
     class S3Bridge,EventBridge sharedLayer
-    class LLM,SDXL,TTS,Subtitler aiTools
+    class LLM,DataProcessor,Validator,Assembler aiTools
 ```
 
 ---
 
 ## 2. Agent Processing Flow
 
-This diagram illustrates the complete data flow and processing pipeline from user input to final comic output.
+This diagram illustrates the complete data flow and processing pipeline from user input to final output delivery.
 
 ```mermaid
 sequenceDiagram
@@ -123,50 +121,50 @@ sequenceDiagram
     participant O as 📁 Output S3
     participant C as ☁️ CloudFront
 
-    Note over U,C: Comic Generation Pipeline Flow
+    Note over U,C: Multi-Agent Processing Pipeline Flow
 
-    U->>W: 1. Enter story prompt<br/>"Moody K-pop idol finds puppy"
-    W->>A: 2. HTTP POST /generate
+    U->>W: 1. Submit processing request<br/>"Analyze quarterly data"
+    W->>A: 2. HTTP POST /process
     A->>B: 3. Route to Agent Brown
 
     Note over B: Input Processing & Validation
     B->>B: 4a. Sanitize & validate input
-    B->>B: 4b. Add style tags (Ghibli, etc.)
+    B->>B: 4b. Apply processing profile
     B->>B: 4c. Generate UUID & metadata
 
-    B->>S: 5. Write storyboard.json<br/>{"prompt": "...", "style": "ghibli", "uuid": "..."}
+    B->>S: 5. Write task_config.json<br/>{"request": "...", "profile": "enterprise", "uuid": "..."}
 
     Note over S,E: Cross-VPC Communication
     S->>E: 6. S3 Event Notification
     E->>BY: 7. Trigger Agent Bayko
 
-    Note over BY,T: MCP Orchestration & Generation
-    BY->>S: 8. Read storyboard.json
+    Note over BY,T: MCP Orchestration & Processing
+    BY->>S: 8. Read task_config.json
     BY->>M: 9. Initialize MCP Router
 
-    M->>T: 10a. Generate dialogue (LLM)
-    T-->>M: 10b. Structured dialogue
+    M->>T: 10a. Process with LLM
+    T-->>M: 10b. Structured analysis
 
-    M->>T: 11a. Generate comic panels (SDXL)
-    T-->>M: 11b. Panel images
+    M->>T: 11a. Transform data
+    T-->>M: 11b. Processed dataset
 
-    M->>T: 12a. Generate narration (TTS)
-    T-->>M: 12b. Audio files
+    M->>T: 12a. Validate output
+    T-->>M: 12b. Quality metrics
 
-    M->>T: 13a. Generate subtitles
-    T-->>M: 13b. Caption files
+    M->>T: 13a. Assemble results
+    T-->>M: 13b. Final package
 
-    BY->>BY: 14. Assemble final output<br/>(video/zip bundle)
+    BY->>BY: 14. Package output<br/>(structured payload)
 
     Note over O,C: Output Delivery
-    BY->>O: 15. Write to output/{uuid}/final.mp4
+    BY->>O: 15. Write to output/{uuid}/payload.json
     O->>C: 16. Distribute via CDN
 
-    Note over W: Polling or WebSocket Update
+    Note over W: Status Monitoring
     BY->>S: 17. Write completion status
     B->>S: 18. Monitor for completion
     B->>W: 19. Return signed URL
-    W->>U: 20. Display generated comic
+    W->>U: 20. Display results
 
     Note over U,C: Session Complete
 ```
@@ -175,7 +173,7 @@ sequenceDiagram
 
 ## 3. MCP Subsystem Architecture
 
-The Model Context Protocol (MCP) serves as Bayko's internal orchestration brain, routing tasks to appropriate AI tools and managing the generation pipeline.
+The Model Context Protocol (MCP) serves as Bayko's internal orchestration engine, routing tasks to appropriate tools and managing the processing pipeline.
 
 ```mermaid
 graph TB
@@ -189,51 +187,51 @@ graph TB
 
         subgraph "Tool Interfaces"
             LLMInterface[🤖 LLM Interface]
-            ImageInterface[🎨 Image Interface]
-            AudioInterface[🔊 Audio Interface]
+            ProcessingInterface[📊 Processing Interface]
+            ValidationInterface[✅ Validation Interface]
             UtilInterface[🛠️ Utility Interface]
         end
 
-        subgraph "AI Tool Implementations"
+        subgraph "Tool Implementations"
             subgraph "Language Processing"
                 OpenAI[OpenAI GPT]
                 Claude[Anthropic Claude]
                 Llama[Meta Llama]
             end
 
-            subgraph "Image Generation"
-                SDXL[Stable Diffusion XL]
-                MidJ[Midjourney API]
-                DALLE[DALL-E 3]
+            subgraph "Data Processing"
+                DataAnalyzer[Data Analyzer]
+                ReportGenerator[Report Generator]
+                DocumentProcessor[Document Processor]
             end
 
-            subgraph "Audio Synthesis"
-                ElevenLabs[ElevenLabs TTS]
-                AzureTTS[Azure Speech]
-                PollyTTS[AWS Polly]
+            subgraph "Quality Assurance"
+                QualityChecker[Quality Checker]
+                ComplianceValidator[Compliance Validator]
+                FormatConverter[Format Converter]
             end
 
             subgraph "Utilities"
-                Subtitler[Subtitle Generator]
-                VideoAssembler[Video Assembler]
-                QualityChecker[Quality Validator]
+                MetadataExtractor[Metadata Extractor]
+                OutputAssembler[Output Assembler]
+                PerformanceMonitor[Performance Monitor]
             end
         end
     end
 
     subgraph "External Inputs"
-        StoryboardJSON[📝 storyboard.json]
-        UserPrefs[⚙️ User Preferences]
+        TaskConfigJSON[📝 task_config.json]
+        UserPrefs[⚙️ Processing Profile]
     end
 
     subgraph "External Outputs"
-        OutputBundle[📦 Output Bundle]
-        Metadata[📋 Generation Metadata]
+        OutputPayload[📦 Output Payload]
+        Metadata[📋 Processing Metadata]
         Logs[📊 Process Logs]
     end
 
     %% Input Flow
-    StoryboardJSON --> MCPRouter
+    TaskConfigJSON --> MCPRouter
     UserPrefs --> MCPRouter
 
     %% Core MCP Flow
@@ -244,8 +242,8 @@ graph TB
 
     %% Tool Routing
     MCPRouter --> LLMInterface
-    MCPRouter --> ImageInterface
-    MCPRouter --> AudioInterface
+    MCPRouter --> ProcessingInterface
+    MCPRouter --> ValidationInterface
     MCPRouter --> UtilInterface
 
     %% Interface to Implementation Mapping
@@ -253,43 +251,43 @@ graph TB
     LLMInterface --> Claude
     LLMInterface --> Llama
 
-    ImageInterface --> SDXL
-    ImageInterface --> MidJ
-    ImageInterface --> DALLE
+    ProcessingInterface --> DataAnalyzer
+    ProcessingInterface --> ReportGenerator
+    ProcessingInterface --> DocumentProcessor
 
-    AudioInterface --> ElevenLabs
-    AudioInterface --> AzureTTS
-    AudioInterface --> PollyTTS
+    ValidationInterface --> QualityChecker
+    ValidationInterface --> ComplianceValidator
+    ValidationInterface --> FormatConverter
 
-    UtilInterface --> Subtitler
-    UtilInterface --> VideoAssembler
-    UtilInterface --> QualityChecker
+    UtilInterface --> MetadataExtractor
+    UtilInterface --> OutputAssembler
+    UtilInterface --> PerformanceMonitor
 
     %% Output Generation
-    MCPRouter --> OutputBundle
+    MCPRouter --> OutputPayload
     StateManager --> Metadata
     MCPRouter --> Logs
 
     classDef mcpCore fill:#e3f2fd
     classDef interfaces fill:#f1f8e9
     classDef langTools fill:#fff3e0
-    classDef imageTools fill:#fce4ec
-    classDef audioTools fill:#e0f2f1
+    classDef processTools fill:#fce4ec
+    classDef validationTools fill:#e0f2f1
     classDef utilTools fill:#f3e5f5
 
     class MCPRouter,TaskQueue,StateManager,ResourcePool mcpCore
-    class LLMInterface,ImageInterface,AudioInterface,UtilInterface interfaces
+    class LLMInterface,ProcessingInterface,ValidationInterface,UtilInterface interfaces
     class OpenAI,Claude,Llama langTools
-    class SDXL,MidJ,DALLE imageTools
-    class ElevenLabs,AzureTTS,PollyTTS audioTools
-    class Subtitler,VideoAssembler,QualityChecker utilTools
+    class DataAnalyzer,ReportGenerator,DocumentProcessor processTools
+    class QualityChecker,ComplianceValidator,FormatConverter validationTools
+    class MetadataExtractor,OutputAssembler,PerformanceMonitor utilTools
 ```
 
 ---
 
 ## 4. Output Artifact Structure
 
-This diagram shows the comprehensive structure of generated comic outputs and associated metadata.
+This diagram shows the comprehensive structure of generated workflow outputs and associated metadata.
 
 ```mermaid
 graph TB
@@ -299,30 +297,29 @@ graph TB
         subgraph "Session Directory"
             SessionDir[📁 {uuid}/]
 
-            subgraph "Media Assets"
-                FinalVideo[🎬 final.mp4<br/>Complete comic video]
-                PanelZip[📦 panels.zip<br/>Individual comic panels]
-                AudioDir[📁 audio/]
-                SubDir[📁 subtitles/]
+            subgraph "Core Assets"
+                OutputPayload[📦 output_payload.json<br/>Primary results]
+                ProcessedData[📊 processed_data.json<br/>Transformed dataset]
+                ReportsDir[📁 reports/]
+                LogsDir[📁 logs/]
             end
 
-            subgraph "Audio Files"
-                Narration[🔊 narration.wav]
-                Effects[🎵 background.mp3]
-                Dialogue[💬 dialogue_001.wav]
+            subgraph "Report Files"
+                SummaryReport[📄 summary.pdf]
+                DetailedAnalysis[📈 analysis.xlsx]
+                ComplianceReport[✅ compliance.json]
             end
 
-            subgraph "Subtitle Files"
-                SubSRT[📝 subtitles.srt]
-                SubVTT[📝 subtitles.vtt]
-                SubJSON[📋 subtitle_data.json]
+            subgraph "Processing Logs"
+                ProcessingLog[📝 processing.log]
+                ErrorLog[⚠️ errors.log]
+                PerformanceLog[⏱️ performance.json]
             end
 
-            subgraph "Metadata & Logs"
+            subgraph "Metadata & Config"
                 MetaJSON[📊 metadata.json]
-                GenLog[📝 generation.log]
-                Storyboard[📋 original_storyboard.json]
-                Thumbnail[🖼️ thumbnail.jpg]
+                TaskConfig[📋 original_task_config.json]
+                QualityMetrics[📈 quality_metrics.json]
             end
         end
 
@@ -333,26 +330,25 @@ graph TB
     end
 
     subgraph "Metadata Structure Detail"
-        MetaDetail["📊 metadata.json<br/>{<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-06-03T10:30:00Z',<br/>  'user_prompt': 'Original prompt',<br/>  'style_tags': ['ghibli', 'moody'],<br/>  'generation_time': '45.2s',<br/>  'tools_used': ['claude', 'sdxl', 'elevenlabs'],<br/>  'panel_count': 4,<br/>  'resolution': '1920x1080',<br/>  'audio_duration': '32.5s',<br/>  'file_sizes': {...},<br/>  'quality_scores': {...}<br/>}"]
+        MetaDetail["📊 metadata.json<br/>{<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-01-15T10:30:00Z',<br/>  'user_request': 'Original request',<br/>  'processing_profile': ['enterprise', 'secure'],<br/>  'processing_time': '45.2s',<br/>  'tools_used': ['claude', 'data-analyzer'],<br/>  'output_components': 4,<br/>  'quality_score': 0.95,<br/>  'compliance_status': 'passed',<br/>  'file_sizes': {...},<br/>  'performance_metrics': {...}<br/>}"]
     end
 
     Root --> SessionDir
-    SessionDir --> FinalVideo
-    SessionDir --> PanelZip
-    SessionDir --> AudioDir
-    SessionDir --> SubDir
+    SessionDir --> OutputPayload
+    SessionDir --> ProcessedData
+    SessionDir --> ReportsDir
+    SessionDir --> LogsDir
     SessionDir --> MetaJSON
-    SessionDir --> GenLog
-    SessionDir --> Storyboard
-    SessionDir --> Thumbnail
+    SessionDir --> TaskConfig
+    SessionDir --> QualityMetrics
 
-    AudioDir --> Narration
-    AudioDir --> Effects
-    AudioDir --> Dialogue
+    ReportsDir --> SummaryReport
+    ReportsDir --> DetailedAnalysis
+    ReportsDir --> ComplianceReport
 
-    SubDir --> SubSRT
-    SubDir --> SubVTT
-    SubDir --> SubJSON
+    LogsDir --> ProcessingLog
+    LogsDir --> ErrorLog
+    LogsDir --> PerformanceLog
 
     SessionDir --> CloudFrontDist
     CloudFrontDist --> SignedURLs
@@ -360,17 +356,17 @@ graph TB
     MetaJSON -.-> MetaDetail
 
     classDef directories fill:#e1f5fe
-    classDef mediaFiles fill:#e8f5e8
-    classDef audioFiles fill:#fff3e0
-    classDef subtitleFiles fill:#f3e5f5
+    classDef coreFiles fill:#e8f5e8
+    classDef reportFiles fill:#fff3e0
+    classDef logFiles fill:#f3e5f5
     classDef metaFiles fill:#fce4ec
     classDef cdn fill:#e0f2f1
 
-    class Root,SessionDir,AudioDir,SubDir directories
-    class FinalVideo,PanelZip,Thumbnail mediaFiles
-    class Narration,Effects,Dialogue audioFiles
-    class SubSRT,SubVTT,SubJSON subtitleFiles
-    class MetaJSON,GenLog,Storyboard metaFiles
+    class Root,SessionDir,ReportsDir,LogsDir directories
+    class OutputPayload,ProcessedData,QualityMetrics coreFiles
+    class SummaryReport,DetailedAnalysis,ComplianceReport reportFiles
+    class ProcessingLog,ErrorLog,PerformanceLog logFiles
+    class MetaJSON,TaskConfig metaFiles
     class CloudFrontDist,SignedURLs cdn
 ```
 
@@ -410,7 +406,7 @@ graph TB
             EventBridge[⚡ EventBridge<br/>Cross-VPC Triggers]
 
             subgraph "S3 Security"
-                S3Policy["📋 S3 Bucket Policy<br/>- Brown: Read/Write storyboards<br/>- Bayko: Read storyboards<br/>- Bayko: Write outputs<br/>- Public: No direct access"]
+                S3Policy["📋 S3 Bucket Policy<br/>- Brown: Read/Write task configs<br/>- Bayko: Read task configs<br/>- Bayko: Write outputs<br/>- Public: No direct access"]
             end
         end
 
@@ -418,7 +414,7 @@ graph TB
             subgraph "Private Subnet - 10.1.1.0/24"
                 AgentBayko[🧠 Agent Bayko Container]
                 MCPSystem[🔀 MCP Orchestrator]
-                AIToolchain[🛠️ AI Toolchain<br/>SDXL, TTS, LLM]
+                AIToolchain[🛠️ AI Toolchain<br/>LLM, Processing, Validation]
             end
 
             subgraph "NAT Subnet - 10.1.2.0/24"
@@ -527,7 +523,7 @@ graph TB
 
 - **Comprehensive Logging**: CloudWatch captures all agent interactions and processing steps
 - **Traceability**: UUID-based session tracking enables full pipeline visibility
-- **Performance Metrics**: Generation time, resource utilization, and quality scores
+- **Performance Metrics**: Processing time, resource utilization, and quality scores
 
 ### 5. **Scalability & Performance**
 
@@ -536,5 +532,3 @@ graph TB
 - **Resource Pooling**: MCP system efficiently manages AI tool resources
 
 ---
-
-This architecture demonstrates enterprise-grade cloud design principles while showcasing the power of GenAI agent orchestration in a secure, scalable environment.
