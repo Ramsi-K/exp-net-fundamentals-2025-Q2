@@ -1,48 +1,89 @@
-# Networking Bootcamp (2025 with Andrew Brown & Tim McConnaughy)
+# Networking Fundamentals Bootcamp 2025 - Custom Project
 
-This repo tracks my work in the **2-week Networking Bootcamp** led by Andrew Brown, with technical input from Tim McConnaughy (Aviatrix). The course focuses on **practical cloud networking**, likely covering routing, VPNs, SDN, and multi-cloud infrastructure.
+**Andrew Brown & Tim McConnaughy** | **Custom Implementation Path**
 
-📌 Deliverables are due weekly — no late submissions.  
-💥 The goal: go beyond the minimum. Build something that lasts.
+This repository documents my work in the 2025 Networking Fundamentals Bootcamp. **I deviated from the standard demo path** to build an original infrastructure project that demonstrates the same core networking concepts through a production-grade multi-agent orchestration system.
 
-## ⚔️ Bootcamp Format
+## 🎯 Project Overview
 
-- ⏱️ Two weeks of live instruction
-- 🧠 Graded weekly submissions (on-time or bust)
-- 🚫 No extensions or regrades
-- 🎯 Best work comes from pushing beyond the spec
+> This repo does not follow the bootcamp example project.
 
-## 📅 Week Schedule
-- Week 0: Prerequisites (TBD)
-- Week 1: TBD
-- Week 2: TBD
+**Bayko & Brown**: a secure multi-agent orchestration system that demonstrates enterprise networking patterns through:
 
-## ✅ Weekly Deliverables
-Each week folder includes:
-- Lecture notes
-- Submission writeups
-- Network diagrams
-- Bonus material (if any)
+- **VPC Isolation**: Two isolated agents across separate VPCs with controlled communication
+- **Cross-VPC Coordination**: Secure agent communication via S3 and EventBridge
+- **Network Security**: Layer 4 firewalls, IAM policies, and zero-trust architecture
+- **Event-Driven Workflows**: Asynchronous processing with monitoring and observability
 
-## 🧠 Areas I'm Focusing On
+## 📊 Bootcamp Topics → Project Mapping
 
-- Real-world routing & packet flow
-- Network troubleshooting workflows
-- SDN and cloud network architecture
-- How Aviatrix fits into multi-cloud design
+| **Bootcamp Topic**        | **My Implementation**                               |
+| ------------------------- | --------------------------------------------------- |
+| **VPC Design**            | Dual-VPC architecture (Brown-Public, Bayko-Private) |
+| **Firewall Rules**        | Security groups with Layer 4 isolation              |
+| **IP Address Management** | Subnet design (10.0.0.0/16, 10.1.0.0/16)            |
+| **NAT Gateways**          | Private subnet outbound-only access                 |
+| **Load Balancers**        | Application Load Balancer for public tier           |
+| **Network Monitoring**    | CloudWatch logging and performance metrics          |
+| **Traffic Flow**          | Cross-VPC communication patterns via S3/EventBridge |
+| **Zero-Trust**            | No direct agent-to-agent communication              |
 
-## 🔥 Goals
+## 🏗️ Architecture Highlights
 
-- Complete and submit all deliverables on time
-- Document with diagrams + walkthroughs for clarity
-- Apply insights to my 100DoC repo and broader cloud work
+- **Agent Brown (Public VPC)**: Input validation, request routing, session management
+- **Agent Bayko (Private VPC)**: Backend processing, tool orchestration, output assembly
+- **S3 Communication Bridge**: Secure cross-VPC message passing
+- **EventBridge Orchestration**: Event-driven workflow triggers
+- **CloudFront CDN**: Secure content delivery with signed URLs
 
-## 💡 Bonus
-If I go overboard (as I tend to do), check the `extras/` folder.
+## 📁 Repository Structure
 
-## 🔧 Setup (To Be Updated)
+```
+├── projects/
+│   ├── 00-architecture/          # Main project documentation
+│   │   ├── README.md             # Project overview
+│   │   ├── architecture.md       # System diagrams and design
+│   │   ├── agents.md             # Agent responsibilities
+│   │   ├── deployment.md         # Infrastructure setup
+│   │   └── assets/diagrams/      # Mermaid diagrams
+│   ├── 01-week1/                 # Week 1 deliverables
+│   └── 02-week2/                 # Week 2 deliverables
+├── journal/
+│   ├── 00-architecture/          # journal for project 00
+├── notes/
+│   ├── OSI-babas-chakras.md      # mapping OSI layers to chakras
+│   ├── glossary.md               # glossary of terms encountered
+└── README.md                     # This file
+```
 
-- Platform: [TBD]
-- Tooling: Wireshark, Draw.io, Aviatrix docs, cloud consoles, etc.
+## 🎓 Bootcamp Compliance
 
-## 📁 Repo Structure (Starter Template)
+This custom project covers all required networking fundamentals:
+
+✅ **VPC Design & Subnetting**  
+✅ **Security Groups & Firewall Rules**  
+✅ **Cross-Network Communication**  
+✅ **Load Balancing & Traffic Management**  
+✅ **Network Monitoring & Observability**  
+✅ **Zero-Trust Security Patterns**
+
+## 🧠 Notes
+
+- Project intentionally diverges from bootcamp demo
+- Architecture focuses on cloud-native networking patterns
+- All deliverables submitted under respective topic folders as required
+- Architectural diagrams, logs, and deployment details are located in `00-architecture/`
+
+## 💼 Demonstrated Value
+
+This project demonstrates enterprise-level skills in:
+
+- Multi-tier network architecture
+- Secure agent isolation patterns
+- Event-driven system design
+- Production monitoring and observability
+- Infrastructure as Code practices
+
+---
+
+**Built by Ramsi Kalia** | [LinkedIn](https://linkedin.com/in/ramsikalia) | **Networking Fundamentals Bootcamp 2025**
