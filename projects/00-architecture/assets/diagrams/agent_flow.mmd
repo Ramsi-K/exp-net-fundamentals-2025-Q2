@@ -11,49 +11,49 @@ sequenceDiagram
     participant O as 📁 Output S3
     participant C as ☁️ CloudFront
     
-    Note over U,C: Comic Generation Pipeline Flow
+    Note over U,C: Multi-Agent Processing Pipeline Flow
     
-    U->>W: 1. Enter story prompt<br/>"Moody K-pop idol finds puppy"
-    W->>A: 2. HTTP POST /generate
+    U->>W: 1. Submit processing request<br/>"Analyze quarterly data"
+    W->>A: 2. HTTP POST /process
     A->>B: 3. Route to Agent Brown
     
     Note over B: Input Processing & Validation
     B->>B: 4a. Sanitize & validate input
-    B->>B: 4b. Add style tags (Ghibli, etc.)
+    B->>B: 4b. Apply processing profile
     B->>B: 4c. Generate UUID & metadata
     
-    B->>S: 5. Write storyboard.json<br/>{"prompt": "...", "style": "ghibli", "uuid": "..."}
+    B->>S: 5. Write task_config.json<br/>{"request": "...", "profile": "enterprise", "uuid": "..."}
     
     Note over S,E: Cross-VPC Communication
     S->>E: 6. S3 Event Notification
     E->>BY: 7. Trigger Agent Bayko
     
-    Note over BY,T: MCP Orchestration & Generation
-    BY->>S: 8. Read storyboard.json
+    Note over BY,T: MCP Orchestration & Processing
+    BY->>S: 8. Read task_config.json
     BY->>M: 9. Initialize MCP Router
     
-    M->>T: 10a. Generate dialogue (LLM)
-    T-->>M: 10b. Structured dialogue
+    M->>T: 10a. Process with LLM
+    T-->>M: 10b. Structured analysis
     
-    M->>T: 11a. Generate comic panels (SDXL)
-    T-->>M: 11b. Panel images
+    M->>T: 11a. Transform data
+    T-->>M: 11b. Processed dataset
     
-    M->>T: 12a. Generate narration (TTS)
-    T-->>M: 12b. Audio files
+    M->>T: 12a. Validate output
+    T-->>M: 12b. Quality metrics
     
-    M->>T: 13a. Generate subtitles
-    T-->>M: 13b. Caption files
+    M->>T: 13a. Assemble results
+    T-->>M: 13b. Final package
     
-    BY->>BY: 14. Assemble final output<br/>(video/zip bundle)
+    BY->>BY: 14. Package output<br/>(structured payload)
     
     Note over O,C: Output Delivery
-    BY->>O: 15. Write to output/{uuid}/final.mp4
+    BY->>O: 15. Write to output/{uuid}/payload.json
     O->>C: 16. Distribute via CDN
     
-    Note over W: Polling or WebSocket Update
+    Note over W: Status Monitoring
     BY->>S: 17. Write completion status
     B->>S: 18. Monitor for completion
     B->>W: 19. Return signed URL
-    W->>U: 20. Display generated comic
+    W->>U: 20. Display results
     
     Note over U,C: Session Complete

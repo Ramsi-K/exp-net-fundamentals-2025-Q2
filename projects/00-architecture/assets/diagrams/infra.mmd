@@ -7,12 +7,12 @@ graph TB
     subgraph "VPC-Brown (Public Tier)" 
         ALB[🔄 Application Load Balancer]
         AGW[🌐 API Gateway]
-        Brown[🤖 Agent Brown<br/>Input Validator & Formatter]
+        Brown[🤖 Agent Brown<br/>Input Validator & Router]
         ModLambda[🛡️ Moderation Lambda]
     end
     
     subgraph "Shared Communication Layer"
-        S3Bridge[📦 S3 Communication Bridge<br/>storyboard.json]
+        S3Bridge[📦 S3 Communication Bridge<br/>task_config.json]
         EventBridge[⚡ EventBridge Triggers]
     end
     
@@ -22,9 +22,9 @@ graph TB
         
         subgraph "AI Toolchain"
             LLM[🤖 Language Models]
-            SDXL[🎨 Stable Diffusion XL]
-            TTS[🔊 Text-to-Speech]
-            Subtitler[📝 Subtitle Generator]
+            DataProcessor[📊 Data Processor]
+            Validator[✅ Quality Validator]
+            Assembler[🔧 Output Assembler]
         end
         
         NAT[🌐 NAT Gateway]
@@ -55,9 +55,9 @@ graph TB
     %% Internal Bayko Processing
     Bayko --> MCPRouter
     MCPRouter --> LLM
-    MCPRouter --> SDXL
-    MCPRouter --> TTS
-    MCPRouter --> Subtitler
+    MCPRouter --> DataProcessor
+    MCPRouter --> Validator
+    MCPRouter --> Assembler
     
     %% Output Flow
     Bayko --> OutputS3
@@ -79,4 +79,4 @@ graph TB
     class ALB,AGW,Brown,ModLambda publicTier
     class Bayko,MCPRouter,NAT privateTier
     class S3Bridge,EventBridge sharedLayer
-    class LLM,SDXL,TTS,Subtitler aiTools
+    class LLM,DataProcessor,Validator,Assembler aiTools

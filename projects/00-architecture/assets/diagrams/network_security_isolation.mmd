@@ -27,7 +27,7 @@ graph TB
             EventBridge[⚡ EventBridge<br/>Cross-VPC Triggers]
             
             subgraph "S3 Security"
-                S3Policy["📋 S3 Bucket Policy<br/>- Brown: Read/Write storyboards<br/>- Bayko: Read storyboards<br/>- Bayko: Write outputs<br/>- Public: No direct access"]
+                S3Policy["📋 S3 Bucket Policy<br/>- Brown: Read/Write task configs<br/>- Bayko: Read task configs<br/>- Bayko: Write outputs<br/>- Public: No direct access"]
             end
         end
         
@@ -35,7 +35,7 @@ graph TB
             subgraph "Private Subnet - 10.1.1.0/24"
                 AgentBayko[🧠 Agent Bayko Container]
                 MCPSystem[🔀 MCP Orchestrator]
-                AIToolchain[🛠️ AI Toolchain<br/>SDXL, TTS, LLM]
+                AIToolchain[🛠️ AI Toolchain<br/>LLM, Processing, Validation]
             end
             
             subgraph "NAT Subnet - 10.1.2.0/24"

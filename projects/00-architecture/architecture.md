@@ -295,7 +295,7 @@ graph TB
         Root[📁 output/]
 
         subgraph "Session Directory"
-            SessionDir[📁 {uuid}/]
+            SessionDir["📁 {uuid}/"]
 
             subgraph "Core Assets"
                 OutputPayload[📦 output_payload.json<br/>Primary results]

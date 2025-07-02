@@ -5,30 +5,29 @@ graph TB
         subgraph "Session Directory"
             SessionDir["📁 {uuid}/"]
             
-            subgraph "Media Assets"
-                FinalVideo[🎬 final.mp4<br/>Complete comic video]
-                PanelZip[📦 panels.zip<br/>Individual comic panels]
-                AudioDir[📁 audio/]
-                SubDir[📁 subtitles/]
+            subgraph "Core Assets"
+                OutputPayload[📦 output_payload.json<br/>Primary results]
+                ProcessedData[📊 processed_data.json<br/>Transformed dataset]
+                ReportsDir[📁 reports/]
+                LogsDir[📁 logs/]
             end
             
-            subgraph "Audio Files"
-                Narration[🔊 narration.wav]
-                Effects[🎵 background.mp3]
-                Dialogue[💬 dialogue_001.wav]
+            subgraph "Report Files"
+                SummaryReport[📄 summary.pdf]
+                DetailedAnalysis[📈 analysis.xlsx]
+                ComplianceReport[✅ compliance.json]
             end
             
-            subgraph "Subtitle Files"
-                SubSRT[📝 subtitles.srt]
-                SubVTT[📝 subtitles.vtt]
-                SubJSON[📋 subtitle_data.json]
+            subgraph "Processing Logs"
+                ProcessingLog[📝 processing.log]
+                ErrorLog[⚠️ errors.log]
+                PerformanceLog[⏱️ performance.json]
             end
             
-            subgraph "Metadata & Logs"
+            subgraph "Metadata & Config"
                 MetaJSON[📊 metadata.json]
-                GenLog[📝 generation.log]
-                Storyboard[📋 original_storyboard.json]
-                Thumbnail[🖼️ thumbnail.jpg]
+                TaskConfig[📋 original_task_config.json]
+                QualityMetrics[📈 quality_metrics.json]
             end
         end
         
@@ -39,26 +38,25 @@ graph TB
     end
     
     subgraph "Metadata Structure Detail"
-        MetaDetail["📊 metadata.json<br/>{<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-06-03T10:30:00Z',<br/>  'user_prompt': 'Original prompt',<br/>  'style_tags': ['ghibli', 'moody'],<br/>  'generation_time': '45.2s',<br/>  'tools_used': ['claude', 'sdxl', 'elevenlabs'],<br/>  'panel_count': 4,<br/>  'resolution': '1920x1080',<br/>  'audio_duration': '32.5s',<br/>  'file_sizes': {...},<br/>  'quality_scores': {...}<br/>}"]
+        MetaDetail["📊 metadata.json<br/>{<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-01-15T10:30:00Z',<br/>  'user_request': 'Original request',<br/>  'processing_profile': ['enterprise', 'secure'],<br/>  'processing_time': '45.2s',<br/>  'tools_used': ['claude', 'data-analyzer'],<br/>  'output_components': 4,<br/>  'quality_score': 0.95,<br/>  'compliance_status': 'passed',<br/>  'file_sizes': {...},<br/>  'performance_metrics': {...}<br/>}"]
     end
     
     Root --> SessionDir
-    SessionDir --> FinalVideo
-    SessionDir --> PanelZip
-    SessionDir --> AudioDir
-    SessionDir --> SubDir
+    SessionDir --> OutputPayload
+    SessionDir --> ProcessedData
+    SessionDir --> ReportsDir
+    SessionDir --> LogsDir
     SessionDir --> MetaJSON
-    SessionDir --> GenLog
-    SessionDir --> Storyboard
-    SessionDir --> Thumbnail
+    SessionDir --> TaskConfig
+    SessionDir --> QualityMetrics
     
-    AudioDir --> Narration
-    AudioDir --> Effects
-    AudioDir --> Dialogue
+    ReportsDir --> SummaryReport
+    ReportsDir --> DetailedAnalysis
+    ReportsDir --> ComplianceReport
     
-    SubDir --> SubSRT
-    SubDir --> SubVTT
-    SubDir --> SubJSON
+    LogsDir --> ProcessingLog
+    LogsDir --> ErrorLog
+    LogsDir --> PerformanceLog
     
     SessionDir --> CloudFrontDist
     CloudFrontDist --> SignedURLs
@@ -66,15 +64,15 @@ graph TB
     MetaJSON -.-> MetaDetail
     
     classDef directories fill:#e1f5fe
-    classDef mediaFiles fill:#e8f5e8
-    classDef audioFiles fill:#fff3e0
-    classDef subtitleFiles fill:#f3e5f5
+    classDef coreFiles fill:#e8f5e8
+    classDef reportFiles fill:#fff3e0
+    classDef logFiles fill:#f3e5f5
     classDef metaFiles fill:#fce4ec
     classDef cdn fill:#e0f2f1
     
-    class Root,SessionDir,AudioDir,SubDir directories
-    class FinalVideo,PanelZip,Thumbnail mediaFiles
-    class Narration,Effects,Dialogue audioFiles
-    class SubSRT,SubVTT,SubJSON subtitleFiles
-    class MetaJSON,GenLog,Storyboard metaFiles
+    class Root,SessionDir,ReportsDir,LogsDir directories
+    class OutputPayload,ProcessedData,QualityMetrics coreFiles
+    class SummaryReport,DetailedAnalysis,ComplianceReport reportFiles
+    class ProcessingLog,ErrorLog,PerformanceLog logFiles
+    class MetaJSON,TaskConfig metaFiles
     class CloudFrontDist,SignedURLs cdn
