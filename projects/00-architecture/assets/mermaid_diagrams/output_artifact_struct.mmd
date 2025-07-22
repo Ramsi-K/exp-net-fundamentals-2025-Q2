@@ -3,7 +3,7 @@ graph TB
         Root[📁 output/]
 
         subgraph "Session Directory"
-            SessionDir[📁 {uuid}/]
+            SessionDir["📁 [uuid]/"]
 
             subgraph "Core Assets"
                 OutputPayload[📦 output_payload.json<br/>Primary results]
@@ -38,7 +38,7 @@ graph TB
     end
 
     subgraph "Metadata Structure Detail"
-        MetaDetail["📊 metadata.json<br/>{<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-01-15T10:30:00Z',<br/>  'user_request': 'Original request',<br/>  'processing_profile': ['enterprise', 'secure'],<br/>  'processing_time': '45.2s',<br/>  'tools_used': ['claude', 'data-analyzer'],<br/>  'output_components': 4,<br/>  'quality_score': 0.95,<br/>  'compliance_status': 'passed',<br/>  'file_sizes': {...},<br/>  'performance_metrics': {...}<br/>}"]
+        MetaDetail["📊 metadata.json<br/>&#123;<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-01-15T10:30:00Z',<br/>  'user_request': 'Original request',<br/>  'processing_profile': ['enterprise', 'secure'],<br/>  'processing_time': '45.2s',<br/>  'tools_used': ['claude', 'data-analyzer'],<br/>  'output_components': 4,<br/>  'quality_score': 0.95,<br/>  'compliance_status': 'passed',<br/>  'file_sizes': &#123;...&#125;,<br/>  'performance_metrics': &#123;...&#125;<br/>&#125;"]
     end
 
     Root --> SessionDir
