@@ -1,0 +1,105 @@
+graph TB
+    subgraph "Agent Bayko Container"
+        subgraph "MCP Core System"
+            MCPRouter[🔀 MCP Router<br/>Task Orchestrator]
+            TaskQueue[📋 Task Queue]
+            StateManager[📊 State Manager]
+            ResourcePool[🏊 Resource Pool]
+        end
+
+        subgraph "Tool Interfaces"
+            LLMInterface[🤖 LLM Interface]
+            ProcessingInterface[📊 Processing Interface]
+            ValidationInterface[✅ Validation Interface]
+            UtilInterface[🛠️ Utility Interface]
+        end
+
+        subgraph "Tool Implementations"
+            subgraph "Language Processing"
+                OpenAI[OpenAI GPT]
+                Claude[Anthropic Claude]
+                Llama[Meta Llama]
+            end
+
+            subgraph "Data Processing"
+                DataAnalyzer[Data Analyzer]
+                ReportGenerator[Report Generator]
+                DocumentProcessor[Document Processor]
+            end
+
+            subgraph "Quality Assurance"
+                QualityChecker[Quality Checker]
+                ComplianceValidator[Compliance Validator]
+                FormatConverter[Format Converter]
+            end
+
+            subgraph "Utilities"
+                MetadataExtractor[Metadata Extractor]
+                OutputAssembler[Output Assembler]
+                PerformanceMonitor[Performance Monitor]
+            end
+        end
+    end
+
+    subgraph "External Inputs"
+        TaskConfigJSON[📝 task_config.json]
+        UserPrefs[⚙️ Processing Profile]
+    end
+
+    subgraph "External Outputs"
+        OutputPayload[📦 Output Payload]
+        Metadata[📋 Processing Metadata]
+        Logs[📊 Process Logs]
+    end
+
+    %% Input Flow
+    TaskConfigJSON --> MCPRouter
+    UserPrefs --> MCPRouter
+
+    %% Core MCP Flow
+    MCPRouter --> TaskQueue
+    TaskQueue --> StateManager
+    StateManager --> ResourcePool
+    ResourcePool --> MCPRouter
+
+    %% Tool Routing
+    MCPRouter --> LLMInterface
+    MCPRouter --> ProcessingInterface
+    MCPRouter --> ValidationInterface
+    MCPRouter --> UtilInterface
+
+    %% Interface to Implementation Mapping
+    LLMInterface --> OpenAI
+    LLMInterface --> Claude
+    LLMInterface --> Llama
+
+    ProcessingInterface --> DataAnalyzer
+    ProcessingInterface --> ReportGenerator
+    ProcessingInterface --> DocumentProcessor
+
+    ValidationInterface --> QualityChecker
+    ValidationInterface --> ComplianceValidator
+    ValidationInterface --> FormatConverter
+
+    UtilInterface --> MetadataExtractor
+    UtilInterface --> OutputAssembler
+    UtilInterface --> PerformanceMonitor
+
+    %% Output Generation
+    MCPRouter --> OutputPayload
+    StateManager --> Metadata
+    MCPRouter --> Logs
+
+    classDef mcpCore fill:#e3f2fd
+    classDef interfaces fill:#f1f8e9
+    classDef langTools fill:#fff3e0
+    classDef processTools fill:#fce4ec
+    classDef validationTools fill:#e0f2f1
+    classDef utilTools fill:#f3e5f5
+
+    class MCPRouter,TaskQueue,StateManager,ResourcePool mcpCore
+    class LLMInterface,ProcessingInterface,ValidationInterface,UtilInterface interfaces
+    class OpenAI,Claude,Llama langTools
+    class DataAnalyzer,ReportGenerator,DocumentProcessor processTools
+    class QualityChecker,ComplianceValidator,FormatConverter validationTools
+    class MetadataExtractor,OutputAssembler,PerformanceMonitor utilTools

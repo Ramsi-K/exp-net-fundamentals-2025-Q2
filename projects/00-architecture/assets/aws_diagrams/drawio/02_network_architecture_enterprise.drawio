@@ -1,0 +1,232 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" version="28.0.6">
+  <diagram name="Enterprise Network Architecture" id="enterprise-network-architecture">
+    <mxGraphModel dx="902" dy="551" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Bayko &amp;amp; Brown: Secure Multi-VPC Network Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#232F3E;" parent="1" vertex="1">
+          <mxGeometry x="500" y="20" width="1000" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="internet" value="Internet" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.internet;fillColor=#D2D3D3;gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="50" y="100" width="79.5" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="user-device" value="End Users" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;" parent="1" vertex="1">
+          <mxGeometry x="200" y="100" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="enterprise-onprem" value="Enterprise&#xa;On-Premises" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.corporate_data_center;" parent="1" vertex="1">
+          <mxGeometry x="350" y="100" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="direct-connect" value="Direct Connect&#xa;1Gbps Dedicated" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.direct_connect;" parent="1" vertex="1">
+          <mxGeometry x="480" y="100" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="aws-region" value="AWS Region (us-east-1)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=16;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#00A4A6;fillColor=#E6F7FF;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" parent="1" vertex="1">
+          <mxGeometry x="50" y="250" width="1900" height="870" as="geometry" />
+        </mxCell>
+        <mxCell id="internet-gateway" value="Internet Gateway" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=1;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.internet_gateway;" parent="aws-region" vertex="1">
+          <mxGeometry x="250" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc-brown" value="VPC-Brown (Public Tier) - 10.0.0.0/16" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=14;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;strokeColor=#248814;fillColor=#E8F5E8;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" parent="aws-region" vertex="1">
+          <mxGeometry x="80" y="160" width="600" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="public-subnet-brown" value="Public Subnet - 10.0.1.0/24 (us-east-1a)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#1976D2;fillColor=#E3F2FD;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" parent="vpc-brown" vertex="1">
+          <mxGeometry x="40" y="40" width="520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="alb-brown" value="ALB Multi-AZ&#xa;HTTPS:443" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#F58536;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.application_load_balancer;" parent="public-subnet-brown" vertex="1">
+          <mxGeometry x="70" y="20" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="api-gateway" value="API Gateway&#xa;Regional" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#FF4081;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.api_gateway;" parent="public-subnet-brown" vertex="1">
+          <mxGeometry x="350" y="20" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="private-subnet-brown" value="Private Subnet - 10.0.2.0/24 (us-east-1a)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#7B1FA2;fillColor=#F3E5F5;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" parent="vpc-brown" vertex="1">
+          <mxGeometry x="40" y="180" width="520" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="agent-brown" value="Agent Brown&#xa;Lambda" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#FF9900;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.lambda;" parent="private-subnet-brown" vertex="1">
+          <mxGeometry x="100" y="40" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="moderation-lambda" value="Moderation&#xa;Lambda" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#FF9900;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.lambda;" parent="private-subnet-brown" vertex="1">
+          <mxGeometry x="360" y="40" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="brown-sg" value="🔒 Brown Security Group&#xa;• Inbound: 443 from Internet&#xa;• Outbound: 443 to S3&#xa;• Outbound: 443 to EventBridge&#xa;• Cross-VPC: Direct Connect" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=0;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="vpc-brown" vertex="1">
+          <mxGeometry x="40" y="330" width="250" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="brown-route-table" value="📋 Route Table (Brown)&#xa;• 0.0.0.0/0 → Internet Gateway&#xa;• 10.0.0.0/16 → Local&#xa;• 10.1.0.0/16 → Direct Connect GW&#xa;• 10.2.0.0/16 → VPC Peering" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#01579b;fontSize=11;fontStyle=0;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="vpc-brown" vertex="1">
+          <mxGeometry x="310" y="330" width="250" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="shared-services" value="Shared Communication Services" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" parent="aws-region" vertex="1">
+          <mxGeometry x="750" y="180" width="350" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-communication" value="S3 Communication&#xa;Bridge" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F48CC;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.s3;" parent="aws-region" vertex="1">
+          <mxGeometry x="790" y="240" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="eventbridge" value="EventBridge&#xa;Cross-VPC Rules" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#FF4081;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.eventbridge;" parent="aws-region" vertex="1">
+          <mxGeometry x="970" y="250" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="s3-policy" value="📋 S3 Bucket Policy&#xa;• Brown: Read/Write task configs&#xa;• Bayko: Read task configs&#xa;• Bayko: Write outputs&#xa;• Public: No direct access&#xa;• Enterprise: Direct Connect access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#01579b;fontSize=11;fontStyle=0;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="aws-region" vertex="1">
+          <mxGeometry x="770" y="380" width="310" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc-bayko" value="VPC-Bayko (Private Tier) - 10.1.0.0/16" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=14;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;strokeColor=#D32F2F;fillColor=#FFEBEE;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" parent="aws-region" vertex="1">
+          <mxGeometry x="1190" y="170" width="600" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="private-subnet-bayko" value="Private Subnet - 10.1.1.0/24 (us-east-1a)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#7B1FA2;fillColor=#F3E5F5;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" parent="vpc-bayko" vertex="1">
+          <mxGeometry x="20" y="60" width="250" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ecs-fargate" value="ECS Fargate&#xa;Agent Bayko" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.fargate;" parent="private-subnet-bayko" vertex="1">
+          <mxGeometry x="50" y="50" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mcp-container" value="MCP Router&#xa;Container" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.ecs_container;" parent="private-subnet-bayko" vertex="1">
+          <mxGeometry x="150" y="50" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nat-subnet-bayko" value="NAT Subnet - 10.1.2.0/24 (us-east-1a)" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=12;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_subnet;strokeColor=#1976D2;fillColor=#E3F2FD;verticalAlign=top;align=left;spacingLeft=30;fontColor=#232F3E;dashed=0;" parent="vpc-bayko" vertex="1">
+          <mxGeometry x="320" y="60" width="250" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="nat-gateway" value="NAT Gateway&#xa;Outbound Only" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.nat_gateway;" parent="nat-subnet-bayko" vertex="1">
+          <mxGeometry x="50" y="50" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc-endpoints" value="VPC Endpoints&#xa;S3, EventBridge" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.vpc_endpoint;" parent="nat-subnet-bayko" vertex="1">
+          <mxGeometry x="150" y="50" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bayko-sg" value="🔒 Bayko Security Group&#xa;• Inbound: EventBridge only&#xa;• Outbound: 443 via NAT&#xa;• Outbound: 443 to S3&#xa;• NO direct inbound from Brown&#xa;• Enterprise: Direct Connect access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=0;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="vpc-bayko" vertex="1">
+          <mxGeometry x="20" y="260" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="bayko-route-table" value="📋 Route Table (Bayko)&#xa;• 0.0.0.0/0 → NAT Gateway&#xa;• 10.1.0.0/16 → Local&#xa;• 10.0.0.0/16 → Direct Connect GW&#xa;• AWS Services → VPC Endpoints&#xa;• Enterprise → Direct Connect" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#01579b;fontSize=11;fontStyle=0;align=left;verticalAlign=top;spacingTop=10;spacingLeft=10;" parent="vpc-bayko" vertex="1">
+          <mxGeometry x="330" y="260" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="GY524i6iPEBoU4qnMtBJ-1" value="Direct Connect Gateway&lt;br&gt;Multi-VPC Routing" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.direct_connect;" parent="aws-region" vertex="1">
+          <mxGeometry x="590" y="10" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-dx-bayko" value="Enterprise&#xa;to Bayko VPC" style="endArrow=none;dashed=1;html=1;strokeColor=#8C4FFF;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=9;" parent="aws-region" source="GY524i6iPEBoU4qnMtBJ-1" target="vpc-bayko" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="150" as="sourcePoint" />
+            <mxPoint x="300" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-dx-brown" value="Enterprise&#xa;to Brown VPC" style="endArrow=none;dashed=1;html=1;strokeColor=#8C4FFF;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=9;" parent="aws-region" source="GY524i6iPEBoU4qnMtBJ-1" target="vpc-brown" edge="1">
+          <mxGeometry x="0.3992" y="3" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="150" as="sourcePoint" />
+            <mxPoint x="300" y="100" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GY524i6iPEBoU4qnMtBJ-2" value="" style="group" parent="aws-region" vertex="1" connectable="0">
+          <mxGeometry x="615" y="640" width="670" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="output-services" value="Output &amp; Monitoring Services" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#009688;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" parent="GY524i6iPEBoU4qnMtBJ-2" vertex="1">
+          <mxGeometry width="670" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="output-s3-bucket" value="Output S3 Bucket" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#3F48CC;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.s3;" parent="GY524i6iPEBoU4qnMtBJ-2" vertex="1">
+          <mxGeometry x="70" y="30" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudfront-cdn" value="CloudFront CDN" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.cloudfront;" parent="GY524i6iPEBoU4qnMtBJ-2" vertex="1">
+          <mxGeometry x="220" y="30" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudwatch-logs" value="CloudWatch Logs" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#759C3E;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.cloudwatch;" parent="GY524i6iPEBoU4qnMtBJ-2" vertex="1">
+          <mxGeometry x="370" y="30" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="iam-roles" value="IAM Roles &amp; Policies" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.iam;" parent="GY524i6iPEBoU4qnMtBJ-2" vertex="1">
+          <mxGeometry x="520" y="30" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="flow-output-cdn" value="13. CDN&#xa;Distribution" style="endArrow=classic;html=1;rounded=0;strokeColor=#8C4FFF;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=10;" parent="GY524i6iPEBoU4qnMtBJ-2" source="output-s3-bucket" target="cloudfront-cdn" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="-470" as="sourcePoint" />
+            <mxPoint x="220" y="-520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-bayko-output" value="12. Processing&#xa;Results" style="endArrow=classic;html=1;rounded=0;strokeColor=#009688;strokeWidth=3;labelBackgroundColor=#ffffff;fontSize=10;" parent="aws-region" source="ecs-fargate" target="output-s3-bucket" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="150" as="sourcePoint" />
+            <mxPoint x="300" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-users-igw" value="1. HTTPS:443&#xa;Internet Traffic" style="endArrow=classic;html=1;rounded=0;strokeColor=#1976D2;strokeWidth=3;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="user-device" target="internet-gateway" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-enterprise-dx" value="2. BGP Routes&#xa;Private Connectivity" style="endArrow=classic;html=1;rounded=0;strokeColor=#8C4FFF;strokeWidth=3;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="enterprise-onprem" target="direct-connect" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-dx-gateway" value="3. Multi-VPC&#xa;Routing" style="endArrow=classic;html=1;rounded=0;strokeColor=#8C4FFF;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="direct-connect" target="GY524i6iPEBoU4qnMtBJ-1" edge="1">
+          <mxGeometry x="0.0293" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="590" y="230" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-igw-alb" value="4. Load Balance&#xa;Target Groups" style="endArrow=classic;html=1;rounded=0;strokeColor=#4CAF50;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="internet-gateway" target="alb-brown" edge="1">
+          <mxGeometry x="-0.3799" y="-4" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-alb-api" value="5. API Gateway&#xa;Integration" style="endArrow=classic;html=1;rounded=0;strokeColor=#FF9800;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="alb-brown" target="api-gateway" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-api-brown" value="6. Lambda&#xa;Invoke" style="endArrow=classic;html=1;rounded=0;strokeColor=#FF9800;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="api-gateway" target="agent-brown" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-brown-s3" value="7. Cross-VPC&#xa;S3 PUT Event" style="endArrow=classic;html=1;rounded=0;strokeColor=#03A9F4;strokeWidth=4;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="agent-brown" target="s3-communication" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-s3-eventbridge" value="8. S3 Event&#xa;Notification" style="endArrow=classic;html=1;rounded=0;strokeColor=#FFC107;strokeWidth=3;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="s3-communication" target="eventbridge" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-eventbridge-bayko" value="9. EventBridge&#xa;Rule Trigger" style="endArrow=classic;html=1;rounded=0;strokeColor=#9C27B0;strokeWidth=4;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="eventbridge" target="ecs-fargate" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-bayko-mcp" value="10. Container&#xa;Orchestration" style="endArrow=classic;html=1;rounded=0;strokeColor=#ED7100;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="ecs-fargate" target="mcp-container" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-bayko-nat" value="11. Outbound&#xa;API Calls" style="endArrow=classic;html=1;rounded=0;strokeColor=#8C4FFF;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="ecs-fargate" target="nat-gateway" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-cdn-users" value="14. Global&#xa;Content Delivery" style="endArrow=classic;html=1;rounded=0;strokeColor=#1976D2;strokeWidth=3;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="cloudfront-cdn" target="user-device" edge="1">
+          <mxGeometry x="-0.9083" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="389" y="200" />
+              <mxPoint x="239" y="200" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow-bayko-endpoints" value="Private&#xa;Service Access" style="endArrow=none;dashed=1;html=1;strokeColor=#8C4FFF;strokeWidth=2;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="ecs-fargate" target="vpc-endpoints" edge="1">
+          <mxGeometry x="0.1266" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="350" y="350" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
