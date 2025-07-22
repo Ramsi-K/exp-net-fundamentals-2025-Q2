@@ -1,89 +1,103 @@
-# Networking Fundamentals Bootcamp 2025 - Custom Project
+# Networking Fundamentals Bootcamp 2025 — Custom Architecture Track
 
-**Andrew Brown & Tim McConnaughy** | **Custom Implementation Path**
+**Instructor: Andrew Brown & Tim McConnaughy**
 
-This repository documents my work in the 2025 Networking Fundamentals Bootcamp. **I deviated from the standard demo path** to build an original infrastructure project that demonstrates the same core networking concepts through a production-grade multi-agent orchestration system.
+This repository documents my work in the 2025 Networking Fundamentals Bootcamp.
+**I intentionally diverged from the standard demo project** to design a custom cloud-native architecture that demonstrates all required networking fundamentals through an enterprise-style AI orchestration system.
 
-## 🎯 Project Overview
+---
 
-> This repo does not follow the bootcamp example project.
+## 🧠 Architecture at a Glance
 
-**Bayko & Brown**: a secure multi-agent orchestration system that demonstrates enterprise networking patterns through:
+This high-level architecture showcases the components and AWS services used to implement zero-trust, VPC-isolated AI orchestration across multiple domains.
 
-- **VPC Isolation**: Two isolated agents across separate VPCs with controlled communication
-- **Cross-VPC Coordination**: Secure agent communication via S3 and EventBridge
-- **Network Security**: Layer 4 firewalls, IAM policies, and zero-trust architecture
-- **Event-Driven Workflows**: Asynchronous processing with monitoring and observability
+![System Overview](./projects/00-architecture/assets/aws_diagrams/png/01_system_overview_enterprise.drawio.png)
 
-## 📊 Bootcamp Topics → Project Mapping
+---
 
-| **Bootcamp Topic**        | **My Implementation**                               |
-| ------------------------- | --------------------------------------------------- |
-| **VPC Design**            | Dual-VPC architecture (Brown-Public, Bayko-Private) |
-| **Firewall Rules**        | Security groups with Layer 4 isolation              |
-| **IP Address Management** | Subnet design (10.0.0.0/16, 10.1.0.0/16)            |
-| **NAT Gateways**          | Private subnet outbound-only access                 |
-| **Load Balancers**        | Application Load Balancer for public tier           |
-| **Network Monitoring**    | CloudWatch logging and performance metrics          |
-| **Traffic Flow**          | Cross-VPC communication patterns via S3/EventBridge |
-| **Zero-Trust**            | No direct agent-to-agent communication              |
+## 🔧 Project: Bayko & Brown — Secure Multi-Agent Orchestration System
 
-## 🏗️ Architecture Highlights
+A zero-trust, multi-agent system designed for enterprise AI workflows across isolated VPCs.
 
-- **Agent Brown (Public VPC)**: Input validation, request routing, session management
-- **Agent Bayko (Private VPC)**: Backend processing, tool orchestration, output assembly
-- **S3 Communication Bridge**: Secure cross-VPC message passing
-- **EventBridge Orchestration**: Event-driven workflow triggers
-- **CloudFront CDN**: Secure content delivery with signed URLs
+Key networking principles demonstrated:
+
+- **VPC Isolation** — Brown (Public VPC) and Bayko (Private VPC)
+- **Cross-VPC Communication** — via S3 and EventBridge
+- **Zero Trust** — No direct communication between agents
+- **IAM Role Separation** — Scoped permissions for all agent roles
+- **Event-Driven Architecture** — Asynchronous task processing with traceability
+
+---
+
+## 📊 Bootcamp Topics → Real Implementation
+
+| **Bootcamp Topic**      | **My Implementation**                        |
+| ----------------------- | -------------------------------------------- |
+| VPC Design              | Dual-VPC layout (10.0.x.x / 10.1.x.x)        |
+| Firewall Rules          | Security groups with Layer 4 isolation       |
+| IP Address Management   | Subnets with clear CIDR allocations          |
+| NAT Gateway             | NAT for outbound-only traffic in public tier |
+| Load Balancer           | ALB routes traffic to Agent Brown            |
+| Network Monitoring      | CloudWatch logs + output metrics             |
+| Traffic Flow            | EventBridge + S3 coordination                |
+| Zero Trust Architecture | No runtime agent-to-agent communication      |
+
+---
+
+## 🧱 Core Components
+
+- **Agent Brown (Public VPC):** Input validation, tagging, routing
+- **Agent Bayko (Private VPC):** Tool orchestration, processing, output assembly
+- **S3 Communication Bridge:** Message handoff between agents
+- **EventBridge Orchestration:** Decoupled agent triggers
+- **CloudFront CDN (Optional):** Secure delivery of artifacts
+
+---
 
 ## 📁 Repository Structure
 
 ```
 ├── projects/
-│   ├── 00-architecture/          # Main project documentation
-│   │   ├── README.md             # Project overview
-│   │   ├── architecture.md       # System diagrams and design
-│   │   ├── agents.md             # Agent responsibilities
-│   │   ├── deployment.md         # Infrastructure setup
-│   │   └── assets/diagrams/      # Mermaid diagrams
-│   ├── 01-week1/                 # Week 1 deliverables
-│   └── 02-week2/                 # Week 2 deliverables
+│   ├── 00-architecture/
+│   │   ├── README.md                 # Project-specific readme
+│   │   ├── architecture.md           # System design and diagrams
+│   │   ├── agents.md                 # Agent logic and behavior
+│   │   ├── performance_considerations.md
+│   │   └── enterprise-scenario.md   # Real-world alignment scenarios
+│   ├── 01-week1/
+│   └── 02-week2/
 ├── journal/
-│   ├── 00-architecture/          # journal for project 00
+│   └── 00-architecture/
 ├── notes/
-│   ├── OSI-babas-chakras.md      # mapping OSI layers to chakras
-│   ├── glossary.md               # glossary of terms encountered
-└── README.md                     # This file
+│   ├── glossary.md
+│   └── OSI-babas-chakras.md
+└── README.md  # This file
 ```
-
-## 🎓 Bootcamp Compliance
-
-This custom project covers all required networking fundamentals:
-
-✅ **VPC Design & Subnetting**  
-✅ **Security Groups & Firewall Rules**  
-✅ **Cross-Network Communication**  
-✅ **Load Balancing & Traffic Management**  
-✅ **Network Monitoring & Observability**  
-✅ **Zero-Trust Security Patterns**
-
-## 🧠 Notes
-
-- Project intentionally diverges from bootcamp demo
-- Architecture focuses on cloud-native networking patterns
-- All deliverables submitted under respective topic folders as required
-- Architectural diagrams, logs, and deployment details are located in `00-architecture/`
-
-## 💼 Demonstrated Value
-
-This project demonstrates enterprise-level skills in:
-
-- Multi-tier network architecture
-- Secure agent isolation patterns
-- Event-driven system design
-- Production monitoring and observability
-- Infrastructure as Code practices
 
 ---
 
-**Built by Ramsi Kalia** | [LinkedIn](https://linkedin.com/in/ramsikalia) | **Networking Fundamentals Bootcamp 2025**
+## ✅ Compliance Summary
+
+This custom project satisfies all required networking fundamentals:
+
+- [x] VPC/Subnet design
+- [x] Firewall configuration and SG rules
+- [x] Cross-network service coordination
+- [x] Load balancer integration
+- [x] Event-driven communication
+- [x] Monitoring and observability
+- [x] Zero-trust implementation
+
+---
+
+## 🧠 Learning Highlights
+
+- Designed and documented multi-agent network architecture
+- Applied zero-trust design to AWS cloud networking
+- Implemented asynchronous orchestration using S3 + EventBridge
+- Demonstrated production-grade isolation and security patterns
+- Mapped bootcamp topics to real-world infrastructure
+
+---
+
+**Built by Ramsi Kalia** · [LinkedIn](https://linkedin.com/in/ramsikalia)
