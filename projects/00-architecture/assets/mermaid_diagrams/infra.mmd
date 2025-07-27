@@ -3,79 +3,79 @@ graph TB
         User[👤 User]
         WebUI[🖥️ WebUI Interface]
     end
-    
-    subgraph "VPC-Brown (Public Tier)" 
+
+    subgraph "VPC-Brown (Public Tier)"
         ALB[🔄 Application Load Balancer]
         AGW[🌐 API Gateway]
         Brown[🤖 Agent Brown<br/>Input Validator & Router]
         ModLambda[🛡️ Moderation Lambda]
     end
-    
+
     subgraph "Shared Communication Layer"
         S3Bridge[📦 S3 Communication Bridge<br/>task_config.json]
         EventBridge[⚡ EventBridge Triggers]
     end
-    
+
     subgraph "VPC-Bayko (Private Tier)"
         Bayko[🧠 Agent Bayko<br/>MCP Orchestrator]
         MCPRouter[🔀 MCP Router]
-        
+
         subgraph "AI Toolchain"
             LLM[🤖 Language Models]
             DataProcessor[📊 Data Processor]
             Validator[✅ Quality Validator]
             Assembler[🔧 Output Assembler]
         end
-        
+
         NAT[🌐 NAT Gateway]
     end
-    
+
     subgraph "Output & Delivery"
         OutputS3[📁 Output S3 Bucket]
         CloudFront[☁️ CloudFront CDN]
     end
-    
+
     subgraph "Monitoring & Security"
         CloudWatch[📊 CloudWatch Logs]
         IAM[🔐 IAM Roles & Policies]
     end
-    
+
     %% External Flow
     User --> WebUI
     WebUI --> ALB
     ALB --> AGW
     AGW --> Brown
-    
+
     %% Cross-VPC Communication
     Brown --> S3Bridge
     Brown --> ModLambda
     S3Bridge --> EventBridge
     EventBridge --> Bayko
-    
+
     %% Internal Bayko Processing
     Bayko --> MCPRouter
     MCPRouter --> LLM
     MCPRouter --> DataProcessor
     MCPRouter --> Validator
     MCPRouter --> Assembler
-    
+
     %% Output Flow
     Bayko --> OutputS3
     OutputS3 --> CloudFront
     CloudFront --> WebUI
-    
+
     %% Network & Security
     Bayko --> NAT
     Brown --> CloudWatch
     Bayko --> CloudWatch
     IAM -.-> Brown
     IAM -.-> Bayko
-    
+
     classDef publicTier fill:#e1f5fe
     classDef privateTier fill:#f3e5f5
     classDef sharedLayer fill:#fff3e0
     classDef aiTools fill:#e8f5e8
-    
+
     class ALB,AGW,Brown,ModLambda publicTier
     class Bayko,MCPRouter,NAT privateTier
     class S3Bridge,EventBridge sharedLayer

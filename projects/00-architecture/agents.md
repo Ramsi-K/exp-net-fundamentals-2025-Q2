@@ -15,19 +15,7 @@ _Enterprise-grade agent orchestration with secure isolation and modular tool int
 
 ### System Prompt Handling
 
-```python
-# Dynamic prompt construction with MoE-style routing
-def construct_system_prompt(user_input, processing_profile, safety_level):
-    base_prompt = load_prompt_template("enterprise_workflow")
-    profile_modifiers = apply_processing_tags(processing_profile)
-    safety_constraints = get_safety_constraints(safety_level)
-
-    return {
-        "system": f"{base_prompt}\n{profile_modifiers}\n{safety_constraints}",
-        "metadata": {"version": "v2.1", "profile": processing_profile},
-        "monitoring": {"prompt_length": len(base_prompt), "safety_level": safety_level}
-    }
-```
+System prompts are dynamically constructed based on workflow type, safety level, and routing profiles. Profiles and constraints are applied to templates using internal tagging mechanisms.
 
 ### Logging & Monitoring
 
@@ -56,23 +44,7 @@ def construct_system_prompt(user_input, processing_profile, safety_level):
 
 ### MCP Tool Orchestration
 
-```python
-class MCPOrchestrator:
-    def __init__(self):
-        self.tool_registry = {
-            "llm": ["openai-gpt4", "claude-3", "llama-70b"],
-            "processing": ["document-analyzer", "data-transformer", "report-generator"],
-            "validation": ["quality-checker", "compliance-validator", "format-converter"],
-            "utils": ["metadata-extractor", "output-assembler", "performance-monitor"]
-        }
-        self.health_monitor = ToolHealthMonitor()
-
-    def route_task(self, task_type, requirements, fallback_chain=True):
-        primary_tool = self.select_optimal_tool(task_type, requirements)
-        if not self.health_monitor.is_healthy(primary_tool) and fallback_chain:
-            return self.get_fallback_tool(task_type, requirements)
-        return primary_tool
-```
+Bayko maintains a health-monitored registry of tools organized by task type (LLM, processing, validation, utilities). Tools are selected dynamically based on requirements and fallback strategies.
 
 ### Advanced Logging System
 
@@ -94,32 +66,12 @@ class MCPOrchestrator:
 
 ### S3-Based Message Passing
 
-```json
-{
-  "session_id": "uuid-v4",
-  "timestamp": "2025-01-15T10:30:00Z",
-  "agent_source": "brown",
-  "agent_target": "bayko",
-  "message_type": "processing_request",
-  "payload": {
-    "user_request": "sanitized_input",
-    "processing_profile": ["enterprise", "secure"],
-    "quality_requirements": {
-      "accuracy_threshold": "0.95",
-      "processing_timeout": "300s"
-    },
-    "constraints": {
-      "content_policy": "strict",
-      "compliance_level": "enterprise"
-    }
-  },
-  "metadata": {
-    "prompt_version": "v2.1",
-    "safety_score": 0.95,
-    "processing_priority": "normal"
-  }
-}
-```
+All communication between Brown and Bayko is done via signed S3 objects, which include:
+
+- UUID-based session ID and timestamp
+- Processing profile and safety constraints
+- Sanitized user request payload and quality thresholds
+- Metadata for traceability and logging
 
 ### Event-Driven Triggers
 
@@ -134,26 +86,11 @@ class MCPOrchestrator:
 
 ### CloudWatch Integration
 
-```python
-# Comprehensive metrics collection
-class AgentMetrics:
-    def __init__(self, agent_name):
-        self.cloudwatch = boto3.client('cloudwatch')
-        self.agent_name = agent_name
+Custom metrics are logged for every agent:
 
-    def log_processing_time(self, task_type, duration):
-        self.cloudwatch.put_metric_data(
-            Namespace=f'MultiAgent/{self.agent_name}',
-            MetricData=[
-                {
-                    'MetricName': 'ProcessingTime',
-                    'Dimensions': [{'Name': 'TaskType', 'Value': task_type}],
-                    'Value': duration,
-                    'Unit': 'Seconds'
-                }
-            ]
-        )
-```
+- Processing time by task type
+- Session volume
+- Component-specific failure rates
 
 ### Key Performance Indicators
 

@@ -1,4 +1,4 @@
-## 🧘‍♂️ Enlightenment with OSI Baba
+# 🧘‍♂️ Enlightenment with OSI Baba
 
 A sacred journey through the **7 Layers of the OSI Model**, aligned with the **7 Chakras** of awakened packet consciousness. As interpreted by OSI Baba, sage of subnets, guardian of gateways, and remover of recursive DNS loops.
 
@@ -16,18 +16,20 @@ A sacred journey through the **7 Layers of the OSI Model**, aligned with the **7
 
 ---
 
-### 🕉️ Notes from OSI Baba
+![OSI-Baba](./assets/Enlightenment%20with%20OSI%20Baba%20-%20final.gif)
+
+## 🕉️ Notes from OSI Baba
 
 - _"Without grounding, there is no cloud."_
 - _"TCP flows where Anahata is unblocked."_
 - _"Ajna is required to decode Base64."_
 - _"The Session layer is the Throat — speak clearly or timeout."_
 
-### 🔮 Meditation Prompt
+## 🔮 Meditation Prompt
 
 > Sit in padmasana. Visualize the Ethernet cable as your spine. Now breathe. Are you Layer 1-compliant?
 
-### 🪬 Affirmations
+## 🪬 Affirmations
 
 - "I trust the network."
 - "My packets are valid."

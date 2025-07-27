@@ -1,0 +1,253 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36" version="27.2.0">
+  <diagram name="Multi-Agent Processing Pipeline Flow" id="agent-flow">
+    <mxGraphModel dx="1289" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Multi-Agent Processing Pipeline Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#232F3E;" parent="1" vertex="1">
+          <mxGeometry x="500" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="👤 User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="80" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="webui" value="🖥️ WebUI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#4CAF50;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="80" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="alb" value="🔄 ALB/API Gateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FF9800;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="350" y="80" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="brown" value="🤖 Agent Brown" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#F44336;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="80" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="📦 S3 Bridge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#03A9F4;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="670" y="80" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="eventbridge" value="⚡ EventBridge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FFC107;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="820" y="80" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="bayko" value="🧠 Agent Bayko" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9C27B0;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="970" y="80" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mcp" value="🔀 MCP Router" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#009688;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1120" y="80" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tools" value="🛠️ AI Toolchain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1270" y="80" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="output" value="📁 Output S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#03A9F4;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1420" y="80" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="line-user" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="120" as="sourcePoint" />
+            <mxPoint x="100" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-webui" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="120" as="sourcePoint" />
+            <mxPoint x="250" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-alb" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="120" as="sourcePoint" />
+            <mxPoint x="410" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-brown" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="120" as="sourcePoint" />
+            <mxPoint x="570" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-s3" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="120" as="sourcePoint" />
+            <mxPoint x="720" y="950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-eventbridge" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="870" y="120" as="sourcePoint" />
+            <mxPoint x="870" y="950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-bayko" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1020" y="120" as="sourcePoint" />
+            <mxPoint x="1020" y="950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-mcp" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1170" y="120" as="sourcePoint" />
+            <mxPoint x="1170" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-tools" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1320" y="120" as="sourcePoint" />
+            <mxPoint x="1320" y="960" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="line-output" value="" style="endArrow=none;dashed=1;html=1;strokeColor=#666666;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1470" y="120" as="sourcePoint" />
+            <mxPoint x="1470" y="950" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step1" value="1. Submit processing request" style="endArrow=classic;html=1;rounded=0;strokeColor=#1976D2;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="160" as="sourcePoint" />
+            <mxPoint x="250" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step2" value="2. HTTP POST /process" style="endArrow=classic;html=1;rounded=0;strokeColor=#4CAF50;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="190" as="sourcePoint" />
+            <mxPoint x="410" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step3" value="3. Route to Agent Brown" style="endArrow=classic;html=1;rounded=0;strokeColor=#FF9800;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="220" as="sourcePoint" />
+            <mxPoint x="570" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note-brown" value="Input Processing &amp; Validation&#xa;4a. Sanitize &amp; validate input&#xa;4b. Apply processing profile&#xa;4c. Generate UUID &amp; metadata" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#F44336;fontSize=10;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="480" y="250" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="step5" value="5. Write task_config.json" style="endArrow=classic;html=1;rounded=0;strokeColor=#03A9F4;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="360" as="sourcePoint" />
+            <mxPoint x="720" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note-cross-vpc" value="Cross-VPC Communication" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FFC107;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="720" y="390" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="step6" value="6. S3 Event Notification" style="endArrow=classic;html=1;rounded=0;strokeColor=#FFC107;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="450" as="sourcePoint" />
+            <mxPoint x="870" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step7" value="7. Trigger Agent Bayko" style="endArrow=classic;html=1;rounded=0;strokeColor=#9C27B0;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="870" y="480" as="sourcePoint" />
+            <mxPoint x="1020" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note-mcp" value="MCP Orchestration &amp; Processing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#009688;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1020" y="510" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="step8" value="8. Read task_config.json" style="endArrow=classic;html=1;rounded=0;strokeColor=#03A9F4;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1020" y="570" as="sourcePoint" />
+            <mxPoint x="720" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step9" value="9. Initialize MCP Router" style="endArrow=classic;html=1;rounded=0;strokeColor=#009688;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1020" y="600" as="sourcePoint" />
+            <mxPoint x="1170" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step10a" value="10a. Process with LLM" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F51B5;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1170" y="630" as="sourcePoint" />
+            <mxPoint x="1320" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step10b" value="10b. Structured analysis" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F51B5;strokeWidth=1;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1320" y="650" as="sourcePoint" />
+            <mxPoint x="1170" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step11a" value="11a. Transform data" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F51B5;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1170" y="680" as="sourcePoint" />
+            <mxPoint x="1320" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step11b" value="11b. Processed dataset" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F51B5;strokeWidth=1;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1320" y="700" as="sourcePoint" />
+            <mxPoint x="1170" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step12a" value="12a. Validate output" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F51B5;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1170" y="730" as="sourcePoint" />
+            <mxPoint x="1320" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step12b" value="12b. Quality metrics" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F51B5;strokeWidth=1;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1320" y="750" as="sourcePoint" />
+            <mxPoint x="1170" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step13a" value="13a. Assemble results" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F51B5;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1170" y="780" as="sourcePoint" />
+            <mxPoint x="1320" y="780" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step13b" value="13b. Final package" style="endArrow=classic;html=1;rounded=0;strokeColor=#3F51B5;strokeWidth=1;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1320" y="800" as="sourcePoint" />
+            <mxPoint x="1170" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step14" value="14. Output Packaging" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#9C27B0;fontSize=10;fontStyle=0;" parent="1" vertex="1">
+          <mxGeometry x="950" y="820" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="note-output" value="Output Delivery" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#03A9F4;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1370" y="390" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="step15" value="15. Write to output/{uuid}/payload.json" style="endArrow=classic;html=1;rounded=0;strokeColor=#03A9F4;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1020" y="860" as="sourcePoint" />
+            <mxPoint x="1470" y="860" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step16" value="16. Distribute via CDN" style="endArrow=classic;html=1;rounded=0;strokeColor=#03A9F4;strokeWidth=1;dashed=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1470" y="880" as="sourcePoint" />
+            <mxPoint x="250" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step17" value="17. Write completion status" style="endArrow=classic;html=1;rounded=0;strokeColor=#03A9F4;strokeWidth=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1020" y="890" as="sourcePoint" />
+            <mxPoint x="720" y="890" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step18" value="18. Monitor for completion" style="endArrow=classic;html=1;rounded=0;strokeColor=#03A9F4;strokeWidth=1;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="900" as="sourcePoint" />
+            <mxPoint x="720" y="900" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step19" value="19. Return signed URL via Cloudfront" style="endArrow=classic;html=1;rounded=0;strokeColor=#F44336;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="920" as="sourcePoint" />
+            <mxPoint x="250" y="920" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="step20" value="20. Display results" style="endArrow=classic;html=1;rounded=0;strokeColor=#1976D2;strokeWidth=2;labelBackgroundColor=#ffffff;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="940" as="sourcePoint" />
+            <mxPoint x="100" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="session-complete" value="Session Complete" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#4CAF50;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="700" y="960" width="200" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

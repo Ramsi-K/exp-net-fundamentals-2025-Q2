@@ -1,46 +1,46 @@
 graph TB
     subgraph "Output S3 Bucket Structure"
         Root[📁 output/]
-        
+
         subgraph "Session Directory"
-            SessionDir["📁 {uuid}/"]
-            
+            SessionDir["📁 [uuid]/"]
+
             subgraph "Core Assets"
                 OutputPayload[📦 output_payload.json<br/>Primary results]
                 ProcessedData[📊 processed_data.json<br/>Transformed dataset]
                 ReportsDir[📁 reports/]
                 LogsDir[📁 logs/]
             end
-            
+
             subgraph "Report Files"
                 SummaryReport[📄 summary.pdf]
                 DetailedAnalysis[📈 analysis.xlsx]
                 ComplianceReport[✅ compliance.json]
             end
-            
+
             subgraph "Processing Logs"
                 ProcessingLog[📝 processing.log]
                 ErrorLog[⚠️ errors.log]
                 PerformanceLog[⏱️ performance.json]
             end
-            
+
             subgraph "Metadata & Config"
                 MetaJSON[📊 metadata.json]
                 TaskConfig[📋 original_task_config.json]
                 QualityMetrics[📈 quality_metrics.json]
             end
         end
-        
+
         subgraph "CDN Distribution"
             CloudFrontDist[☁️ CloudFront Distribution]
             SignedURLs[🔗 Pre-signed URLs]
         end
     end
-    
+
     subgraph "Metadata Structure Detail"
-        MetaDetail["📊 metadata.json<br/>{<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-01-15T10:30:00Z',<br/>  'user_request': 'Original request',<br/>  'processing_profile': ['enterprise', 'secure'],<br/>  'processing_time': '45.2s',<br/>  'tools_used': ['claude', 'data-analyzer'],<br/>  'output_components': 4,<br/>  'quality_score': 0.95,<br/>  'compliance_status': 'passed',<br/>  'file_sizes': {...},<br/>  'performance_metrics': {...}<br/>}"]
+        MetaDetail["📊 metadata.json<br/>&#123;<br/>  'session_id': 'uuid',<br/>  'timestamp': '2025-01-15T10:30:00Z',<br/>  'user_request': 'Original request',<br/>  'processing_profile': ['enterprise', 'secure'],<br/>  'processing_time': '45.2s',<br/>  'tools_used': ['claude', 'data-analyzer'],<br/>  'output_components': 4,<br/>  'quality_score': 0.95,<br/>  'compliance_status': 'passed',<br/>  'file_sizes': &#123;...&#125;,<br/>  'performance_metrics': &#123;...&#125;<br/>&#125;"]
     end
-    
+
     Root --> SessionDir
     SessionDir --> OutputPayload
     SessionDir --> ProcessedData
@@ -49,27 +49,27 @@ graph TB
     SessionDir --> MetaJSON
     SessionDir --> TaskConfig
     SessionDir --> QualityMetrics
-    
+
     ReportsDir --> SummaryReport
     ReportsDir --> DetailedAnalysis
     ReportsDir --> ComplianceReport
-    
+
     LogsDir --> ProcessingLog
     LogsDir --> ErrorLog
     LogsDir --> PerformanceLog
-    
+
     SessionDir --> CloudFrontDist
     CloudFrontDist --> SignedURLs
-    
+
     MetaJSON -.-> MetaDetail
-    
+
     classDef directories fill:#e1f5fe
     classDef coreFiles fill:#e8f5e8
     classDef reportFiles fill:#fff3e0
     classDef logFiles fill:#f3e5f5
     classDef metaFiles fill:#fce4ec
     classDef cdn fill:#e0f2f1
-    
+
     class Root,SessionDir,ReportsDir,LogsDir directories
     class OutputPayload,ProcessedData,QualityMetrics coreFiles
     class SummaryReport,DetailedAnalysis,ComplianceReport reportFiles
